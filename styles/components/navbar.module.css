@@ -1,0 +1,109 @@
+.navbar {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0vh;
+  background-color: transparent;
+  z-index: 1;
+}
+.navbar .navbarEl {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+.navbarEl::before {
+  position: absolute;
+  left: 0;
+  bottom: -13px;
+  background: url(../../public/img/menu-draw.png);
+  content: "";
+  height: 19px;
+  width: 100%;
+  z-index: 1;
+}
+.navbarTop {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: #f195b2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 6% 0 6%;
+  color: white;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  /* line-height: 50px; */
+}
+.navbarTop:before {
+  content: "";
+  width: 100%;
+  border-bottom: 1px dashed #f5b5c9;
+  position: absolute;
+  left: 0px;
+  bottom: 4px;
+}
+.navbarTop > div:nth-child(1){
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto 1fr;
+    column-gap: 40px;
+}
+.navbarTop > div:nth-child(1) > div span{
+  cursor: pointer;
+}
+.navbarTop > div:nth-child(2){
+    background-color: blue;
+    display: grid;
+    align-items: center;
+    justify-items: end;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 40px;
+}
+
+
+.navbarBottom {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: auto 200px auto;
+}
+.navbarBottom:before {
+  content: "";
+  width: 100%;
+  border-bottom: 1px dashed #c5c5c5;
+  position: absolute;
+  left: 0px;
+  bottom: 6px;
+}
+.navbarBottom > div:nth-child(2) {
+  position: relative;
+  left: 0px;
+  top: 0;
+  width: 100%;
+  height: 200px;
+  display: grid;
+  justify-items: center;
+}
+.navbarBottom > div:nth-child(2)::before {
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: url(../../public/img/logo-circle-4.png) no-repeat scroll center
+    center;
+}
+.navbarBottom > div:nth-child(2) > img {
+  position: absolute;
+  bottom: 70px;
+  height: 60%;
+  width: 60%;
+  z-index: 1;
+}
