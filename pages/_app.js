@@ -39,6 +39,7 @@ class MyApp extends App {
         <Head>
           <title>Purple Cake Boutique</title>
           <link rel="icon" href="/favicon.ico" />
+          <meta property="og:title" content="The Purple Cake Boutique offers cakes which are delicious and unique work of art..." key="title" />
         </Head>
         <Provider>
           <Component {...pageProps} />
