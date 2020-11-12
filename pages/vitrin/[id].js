@@ -12,6 +12,7 @@ function Post({ post }) {
   const back = () => {
     router.back();
   };
+  const src = "/" + post.image
   return (
     <div>
       <Head>
@@ -30,7 +31,7 @@ function Post({ post }) {
                         className="img-fluid"
                         src={
                           post.image
-                            ? post.image
+                            ? src
                             : "/img/cake-feature/c-feature-9.jpg"
                         }
                         alt=""
