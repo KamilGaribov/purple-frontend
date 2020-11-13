@@ -66,34 +66,30 @@ class Provider extends Component {
       } else {
         var decodedCookie = decodeURIComponent(document.cookie);
         var cookies = decodedCookie.split("; ");
-        if (cookies[0].slice(3, 7) != "http") {
-          this.setState({ basketCount: null });
-          return basket.classList.add("display-block");
-        }
         let basketTotal = 0;
         for (let i = 0; i < cookies.length; i++) {
-          cookies[i] = cookies[i].split("=")[0];
-          let arr = [];
-          arr.push(cookies[i].split(", ")[0]);
-          arr.push(cookies[i].split(", ")[1]);
-          arr.push(cookies[i].split(", ")[2]);
-          arr.push(cookies[i].split(", ")[3]);
-          arr.push(cookies[i].split(", ")[4]);
-          arr.push(cookies[i].split(", ")[5]);
-          arr.push(cookies[i].split(", ")[6]);
-          basketItems.push(arr);
-          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+          if (cookies[i].split("=")[1] == "added to shop cart") {
+            let arr = [];
+            cookies[i] = cookies[i].split("=")[0];
+            arr.push(cookies[i].split(", ")[0]);
+            arr.push(cookies[i].split(", ")[1]);
+            arr.push(cookies[i].split(", ")[2]);
+            arr.push(cookies[i].split(", ")[3]);
+            arr.push(cookies[i].split(", ")[4]);
+            arr.push(cookies[i].split(", ")[5]);
+            arr.push(cookies[i].split(", ")[6]);
+            basketItems.push(arr);
+            basketTotal += parseFloat(cookies[i].split(", ")[5]);
+          }
         }
         basketTotal = parseFloat(basketTotal).toFixed(2);
-        this.setState({ basketCount: cookies.length });
+        this.setState({ basketCount: basketItems.length });
         this.setState({ basketItems: basketItems });
         this.setState({ basketTotal: basketTotal });
         basket.classList.add("display-block");
       }
     },
     changeBasket: (e, item) => {
-      console.log(item);
-      console.log(e.target.value);
       var days = 30;
       var d = new Date();
       d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
@@ -122,20 +118,22 @@ class Provider extends Component {
       }
       let basketTotal = 0;
       for (let i = 0; i < cookies.length; i++) {
-        cookies[i] = cookies[i].split("=")[0];
-        let arr = [];
-        arr.push(cookies[i].split(", ")[0]);
-        arr.push(cookies[i].split(", ")[1]);
-        arr.push(cookies[i].split(", ")[2]);
-        arr.push(cookies[i].split(", ")[3]);
-        arr.push(cookies[i].split(", ")[4]);
-        arr.push(cookies[i].split(", ")[5]);
-        arr.push(cookies[i].split(", ")[6]);
-        basketItems.push(arr);
-        basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          cookies[i] = cookies[i].split("=")[0];
+          let arr = [];
+          arr.push(cookies[i].split(", ")[0]);
+          arr.push(cookies[i].split(", ")[1]);
+          arr.push(cookies[i].split(", ")[2]);
+          arr.push(cookies[i].split(", ")[3]);
+          arr.push(cookies[i].split(", ")[4]);
+          arr.push(cookies[i].split(", ")[5]);
+          arr.push(cookies[i].split(", ")[6]);
+          basketItems.push(arr);
+          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        }
       }
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      this.setState({ basketCount: cookies.length });
+      this.setState({ basketCount: basketItems.length });
       this.setState({ basketItems: basketItems });
       this.setState({ basketTotal: basketTotal });
     },
@@ -155,28 +153,30 @@ class Provider extends Component {
       var cookies = decodedCookie.split("; ");
       let basketTotal = 0;
       for (let i = 0; i < cookies.length; i++) {
-        cookies[i] = cookies[i].split("=")[0];
-        let arr = [];
-        arr.push(cookies[i].split(", ")[0]);
-        arr.push(cookies[i].split(", ")[1]);
-        arr.push(cookies[i].split(", ")[2]);
-        arr.push(cookies[i].split(", ")[3]);
-        arr.push(cookies[i].split(", ")[4]);
-        arr.push(cookies[i].split(", ")[5]);
-        arr.push(cookies[i].split(", ")[6]);
-        basketItems.push(arr);
-        basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          cookies[i] = cookies[i].split("=")[0];
+          let arr = [];
+          arr.push(cookies[i].split(", ")[0]);
+          arr.push(cookies[i].split(", ")[1]);
+          arr.push(cookies[i].split(", ")[2]);
+          arr.push(cookies[i].split(", ")[3]);
+          arr.push(cookies[i].split(", ")[4]);
+          arr.push(cookies[i].split(", ")[5]);
+          arr.push(cookies[i].split(", ")[6]);
+          basketItems.push(arr);
+          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        }
       }
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      if (basketItems[0][0] == "") {
-        this.setState({basketCount: null})
-        this.setState({ basketItems: null });
-        this.setState({ basketTotal: null });
-      } else {
-        this.setState({ basketCount: cookies.length });
-        this.setState({ basketItems: basketItems });
-        this.setState({ basketTotal: basketTotal });
-      }
+      // if (basketItems[0][0] == "") {
+      //   this.setState({ basketCount: null });
+      //   this.setState({ basketItems: null });
+      //   this.setState({ basketTotal: null });
+      // } else {
+      this.setState({ basketCount: basketItems.length });
+      this.setState({ basketItems: basketItems });
+      this.setState({ basketTotal: basketTotal });
+      // }
     },
     addCart: (item, type) => {
       let basket = document.querySelector(".basket");
@@ -195,9 +195,9 @@ class Provider extends Component {
         d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
         var expires = "expires=" + d.toUTCString();
         if (item.image) {
-          var src = item.image;
+          var src = "/" + item.image;
         } else {
-          var src = "img/cake-feature/c-feature-9.jpg";
+          var src = "/img/cake-feature/c-feature-9.jpg";
         }
         if (item.discount) {
           var price = item.discount;
@@ -218,25 +218,27 @@ class Provider extends Component {
       let basketItems = [];
       var decodedCookie = decodeURIComponent(document.cookie);
       var cookies = decodedCookie.split("; ");
-      if (cookies[0].slice(3, 7) != "http") {
-        return basket.classList.add("display-block");
-      }
+      // if (cookies[0].slice(3, 7) != "http") {
+      //   return basket.classList.add("display-block");
+      // }
       let basketTotal = 0;
       for (let i = 0; i < cookies.length; i++) {
-        cookies[i] = cookies[i].split("=")[0];
-        let arr = [];
-        arr.push(cookies[i].split(", ")[0]);
-        arr.push(cookies[i].split(", ")[1]);
-        arr.push(cookies[i].split(", ")[2]);
-        arr.push(cookies[i].split(", ")[3]);
-        arr.push(cookies[i].split(", ")[4]);
-        arr.push(cookies[i].split(", ")[5]);
-        arr.push(cookies[i].split(", ")[6]);
-        basketItems.push(arr);
-        basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          cookies[i] = cookies[i].split("=")[0];
+          let arr = [];
+          arr.push(cookies[i].split(", ")[0]);
+          arr.push(cookies[i].split(", ")[1]);
+          arr.push(cookies[i].split(", ")[2]);
+          arr.push(cookies[i].split(", ")[3]);
+          arr.push(cookies[i].split(", ")[4]);
+          arr.push(cookies[i].split(", ")[5]);
+          arr.push(cookies[i].split(", ")[6]);
+          basketItems.push(arr);
+          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        }
       }
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      this.setState({ basketCount: cookies.length });
+      this.setState({ basketCount: basketItems.length });
       this.setState({ basketItems: basketItems });
       this.setState({ basketTotal: basketTotal });
       basket.classList.add("display-block");
@@ -245,32 +247,30 @@ class Provider extends Component {
       let basketItems = [];
       var decodedCookie = decodeURIComponent(document.cookie);
       var cookies = decodedCookie.split("; ");
-      if (cookies[0].slice(3, 7) != "http") {
-        return this.setState({ basketItems: basketItems });
-      }
+      // if (cookies[0].slice(3, 7) != "http") {
+      //   return this.setState({ basketItems: basketItems });
+      // }
       let basketTotal = 0;
       for (let i = 0; i < cookies.length; i++) {
-        cookies[i] = cookies[i].split("=")[0];
-        let arr = [];
-        arr.push(cookies[i].split(", ")[0]);
-        arr.push(cookies[i].split(", ")[1]);
-        arr.push(cookies[i].split(", ")[2]);
-        arr.push(cookies[i].split(", ")[3]);
-        arr.push(cookies[i].split(", ")[4]);
-        arr.push(cookies[i].split(", ")[5]);
-        arr.push(cookies[i].split(", ")[6]);
-        basketItems.push(arr);
-        basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          cookies[i] = cookies[i].split("=")[0];
+          let arr = [];
+          arr.push(cookies[i].split(", ")[0]);
+          arr.push(cookies[i].split(", ")[1]);
+          arr.push(cookies[i].split(", ")[2]);
+          arr.push(cookies[i].split(", ")[3]);
+          arr.push(cookies[i].split(", ")[4]);
+          arr.push(cookies[i].split(", ")[5]);
+          arr.push(cookies[i].split(", ")[6]);
+          basketItems.push(arr);
+          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        }
       }
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      this.setState({ basketCount: cookies.length });
+      this.setState({ basketCount: basketItems.length });
       this.setState({ basketItems: basketItems });
       this.setState({ basketTotal: basketTotal });
     },
-
-
-
-
 
     input: {
       name: null,
@@ -280,25 +280,24 @@ class Provider extends Component {
       adress2: null,
       email: null,
       number: null,
-      note: null
+      note: null,
     },
     query: "?",
     postOrderForm: () => {
-      console.log("post: ")
-      console.log("_", this.state.query)
+      console.log("post: ");
+      console.log("_", this.state.query);
     },
     inputHandler: (e) => {
       const { name, value } = e.target;
-      console.log("name: ", name)
-      console.log("value: ", value)
+      console.log("name: ", name);
+      console.log("value: ", value);
       let formInput = { ...this.state.input };
       switch (name) {
         case "name":
           if (value) {
             if (
-              this.state.query.indexOf(
-                `${name}=${this.state.input.name}&`
-              ) != -1
+              this.state.query.indexOf(`${name}=${this.state.input.name}&`) !=
+              -1
             ) {
               this.setState({
                 query:
@@ -317,9 +316,8 @@ class Provider extends Component {
             }
           } else {
             if (
-              this.state.query.indexOf(
-                `${name}=${this.state.input.name}&`
-              ) != -1
+              this.state.query.indexOf(`${name}=${this.state.input.name}&`) !=
+              -1
             ) {
               this.setState({
                 query: this.state.query.replace(
@@ -334,8 +332,9 @@ class Provider extends Component {
         case "surname":
           if (value) {
             if (
-              this.state.query.indexOf(`${name}=${this.state.input.surname}&`) !=
-              -1
+              this.state.query.indexOf(
+                `${name}=${this.state.input.surname}&`
+              ) != -1
             ) {
               this.setState({
                 query:
@@ -354,8 +353,9 @@ class Provider extends Component {
             }
           } else {
             if (
-              this.state.query.indexOf(`${name}=${this.state.input.surname}&`) !=
-              -1
+              this.state.query.indexOf(
+                `${name}=${this.state.input.surname}&`
+              ) != -1
             ) {
               this.setState({
                 query: this.state.query.replace(
@@ -403,7 +403,7 @@ class Provider extends Component {
           }
           formInput.city = value;
           break;
-          case "adress":
+        case "adress":
           if (value) {
             if (
               this.state.query.indexOf(`${name}=${this.state.input.adress}&`) !=
@@ -439,11 +439,12 @@ class Provider extends Component {
           }
           formInput.adress = value;
           break;
-          case "adress2":
+        case "adress2":
           if (value) {
             if (
-              this.state.query.indexOf(`${name}=${this.state.input.adress2}&`) !=
-              -1
+              this.state.query.indexOf(
+                `${name}=${this.state.input.adress2}&`
+              ) != -1
             ) {
               this.setState({
                 query:
@@ -462,8 +463,9 @@ class Provider extends Component {
             }
           } else {
             if (
-              this.state.query.indexOf(`${name}=${this.state.input.adress2}&`) !=
-              -1
+              this.state.query.indexOf(
+                `${name}=${this.state.input.adress2}&`
+              ) != -1
             ) {
               this.setState({
                 query: this.state.query.replace(
@@ -475,7 +477,7 @@ class Provider extends Component {
           }
           formInput.adress2 = value;
           break;
-          case "email":
+        case "email":
           if (value) {
             if (
               this.state.query.indexOf(`${name}=${this.state.input.email}&`) !=
@@ -511,7 +513,7 @@ class Provider extends Component {
           }
           formInput.email = value;
           break;
-          case "phone":
+        case "phone":
           if (value) {
             if (
               this.state.query.indexOf(`${name}=${this.state.input.phone}&`) !=
@@ -547,7 +549,7 @@ class Provider extends Component {
           }
           formInput.phone = value;
           break;
-          case "note":
+        case "note":
           if (value) {
             if (
               this.state.query.indexOf(`${name}=${this.state.input.note}&`) !=

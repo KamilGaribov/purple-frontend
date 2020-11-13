@@ -14,22 +14,24 @@ class MyApp extends App {
     var decodedCookie = decodeURIComponent(document.cookie);
     var cookies = decodedCookie.split("; ");
     var basket = document.querySelector("#basketCount");
-    if (cookies[0] != "") {
-      basket.innerHTML = cookies.length;
+    var count = 0;
+    for (let i = 0; i < cookies.length; i++) {
+      if (cookies[i].split("=")[1] == "added to shop cart") {
+        count++;
+      }
     }
-    else{
-      basket.innerHTML = 0
-    }
+    basket.innerHTML = count;
     Router.events.on("routeChangeComplete", (url) => {
       var decodedCookie = decodeURIComponent(document.cookie);
       var cookies = decodedCookie.split("; ");
       var basket = document.querySelector("#basketCount");
-      if (cookies[0] != "") {
-        basket.innerHTML = cookies.length;
+      var count = 0;
+      for (let i = 0; i < cookies.length; i++) {
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          count++;
+        }
       }
-      else{
-        basket.innerHTML = 0
-      }
+      basket.innerHTML = count;
     });
   }
   render() {
@@ -39,7 +41,11 @@ class MyApp extends App {
         <Head>
           <title>Purple Cake Boutique</title>
           <link rel="icon" href="/favicon.ico" />
-          <meta property="og:title" content="The Purple Cake Boutique offers cakes which are delicious and unique work of art..." key="title" />
+          <meta
+            property="og:title"
+            content="The Purple Cake Boutique offers cakes which are delicious and unique work of art..."
+            key="title"
+          />
         </Head>
         <Provider>
           <Component {...pageProps} />
