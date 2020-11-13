@@ -272,6 +272,256 @@ class Provider extends Component {
       this.setState({ basketTotal: basketTotal });
     },
 
+    cInput: {
+      name: null,
+      email: null,
+      phone: null,
+      subject: null,
+      message: null,
+    },
+    cPost: "",
+    postContact: () => {
+      console.log("_", this.state.cPost);
+      let form = {
+        method: "POST",
+        body: JSON.stringify({
+          name: this.state.cInput.name,
+          email: this.state.cInput.email,
+          phone: this.state.cInput.phone,
+          subject: this.state.cInput.subject,
+          message: this.state.cInput.message
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      };
+      console.log("form: ", form)
+      console.log("input: ", this.state.cInput)
+      if(this.state.cInput.name == null || this.state.cInput.name == ""){
+        return document.querySelector(".contact_form_area input[name=name]").parentElement.classList.add("input-div-error")
+      }
+      if(this.state.cInput.email == null || this.state.cInput.email == ""){
+        return document.querySelector(".contact_form_area input[name=email]").parentElement.classList.add("input-div-error")
+      }
+      if(this.state.cInput.subject == null || this.state.cInput.subject == ""){
+        return document.querySelector(".contact_form_area input[name=subject]").parentElement.classList.add("input-div-error")
+      }
+      if(this.state.cInput.message == null || this.state.cInput.message == ""){
+        return document.querySelector(".contact_form_area textarea").parentElement.classList.add("input-div-error")
+      }
+      let url = `http://192.168.31.51:8000/contact/`;
+      fetch(url, form)
+        .then((res) => res.json())
+        .then((response) => {
+          let inputs = document.querySelectorAll(".contact_form_area input")
+          for(let i=0; i<inputs.length; i++){
+            inputs[i].value = null
+          }
+          document.querySelector(".contact_form_area textarea").value = null
+          this.setState({contactSuccess: "Mesajınız uğurla göndərildi."})
+        })
+        .catch((error) => console.error("Error:", error));
+    },
+    contactHandler: (e) => {
+      const { name, value } = e.target;
+      console.log("name: ", name);
+      console.log("value: ", value);
+      if(name != "message"){
+        document.querySelector(`.contact_form_area input[name=${name}`).parentElement.classList.remove("input-div-error")
+      }
+      else{
+        document.querySelector(`.contact_form_area textarea`).parentElement.classList.remove("input-div-error")
+      }
+      let formInput = { ...this.state.cInput };
+      switch (name) {
+        case "name":
+          if (value) {
+            if (
+              this.state.cPost.indexOf(`${name}=${this.state.cInput.name}&`) !=
+              -1
+            ) {
+              this.setState({
+                query:
+                  this.state.cPost.replace(
+                    `${name}=${this.state.cInput.name}&`,
+                    ""
+                  ) +
+                  `${name}=` +
+                  value +
+                  "&",
+              });
+            } else {
+              this.setState({
+                cPost: this.state.cPost + `${name}=` + value + "&",
+              });
+            }
+          } else {
+            if (
+              this.state.cPost.indexOf(`${name}=${this.state.cInput.name}&`) !=
+              -1
+            ) {
+              this.setState({
+                query: this.state.cPost.replace(
+                  `${name}=${this.state.cInput.name}&`,
+                  ""
+                ),
+              });
+            }
+          }
+          formInput.name = value;
+          break;
+        case "email":
+          if (value) {
+            if (
+              this.state.cPost.indexOf(`${name}=${this.state.cInput.email}&`) !=
+              -1
+            ) {
+              this.setState({
+                query:
+                  this.state.cPost.replace(
+                    `${name}=${this.state.cInput.email}&`,
+                    ""
+                  ) +
+                  `${name}=` +
+                  value +
+                  "&",
+              });
+            } else {
+              this.setState({
+                cPost: this.state.cPost + `${name}=` + value + "&",
+              });
+            }
+          } else {
+            if (
+              this.state.cPost.indexOf(`${name}=${this.state.cInput.email}&`) !=
+              -1
+            ) {
+              this.setState({
+                query: this.state.cPost.replace(
+                  `${name}=${this.state.cInput.email}&`,
+                  ""
+                ),
+              });
+            }
+          }
+          formInput.email = value;
+          break;
+        case "phone":
+          if (value) {
+            if (
+              this.state.cPost.indexOf(`${name}=${this.state.cInput.phone}&`) !=
+              -1
+            ) {
+              this.setState({
+                query:
+                  this.state.cPost.replace(
+                    `${name}=${this.state.cInput.phone}&`,
+                    ""
+                  ) +
+                  `${name}=` +
+                  value +
+                  "&",
+              });
+            } else {
+              this.setState({
+                cPost: this.state.cPost + `${name}=` + value + "&",
+              });
+            }
+          } else {
+            if (
+              this.state.cPost.indexOf(`${name}=${this.state.cInput.phone}&`) !=
+              -1
+            ) {
+              this.setState({
+                query: this.state.cPost.replace(
+                  `${name}=${this.state.cInput.phone}&`,
+                  ""
+                ),
+              });
+            }
+          }
+          formInput.phone = value;
+          break;
+        case "subject":
+          if (value) {
+            if (
+              this.state.cPost.indexOf(
+                `${name}=${this.state.cInput.subject}&`
+              ) != -1
+            ) {
+              this.setState({
+                query:
+                  this.state.cPost.replace(
+                    `${name}=${this.state.cInput.subject}&`,
+                    ""
+                  ) +
+                  `${name}=` +
+                  value +
+                  "&",
+              });
+            } else {
+              this.setState({
+                cPost: this.state.cPost + `${name}=` + value + "&",
+              });
+            }
+          } else {
+            if (
+              this.state.cPost.indexOf(
+                `${name}=${this.state.cInput.subject}&`
+              ) != -1
+            ) {
+              this.setState({
+                query: this.state.cPost.replace(
+                  `${name}=${this.state.cInput.subject}&`,
+                  ""
+                ),
+              });
+            }
+          }
+          formInput.subject = value;
+          break;
+        case "message":
+          if (value) {
+            if (
+              this.state.cPost.indexOf(
+                `${name}=${this.state.cInput.message}&`
+              ) != -1
+            ) {
+              this.setState({
+                query:
+                  this.state.cPost.replace(
+                    `${name}=${this.state.cInput.message}&`,
+                    ""
+                  ) +
+                  `${name}=` +
+                  value +
+                  "&",
+              });
+            } else {
+              this.setState({
+                cPost: this.state.cPost + `${name}=` + value + "&",
+              });
+            }
+          } else {
+            if (
+              this.state.cPost.indexOf(
+                `${name}=${this.state.cInput.message}&`
+              ) != -1
+            ) {
+              this.setState({
+                query: this.state.cPost.replace(
+                  `${name}=${this.state.cInput.message}&`,
+                  ""
+                ),
+              });
+            }
+          }
+          formInput.message = value;
+          break;
+      }
+      this.setState({ cInput: formInput });
+    },
+
     input: {
       name: null,
       surname: null,

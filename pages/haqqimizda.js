@@ -139,8 +139,10 @@ function About() {
                           className="form-control"
                           id="name"
                           name="name"
-                          placeholder="Adınız"
+                          placeholder="Adınız *"
+                          onBlur={(e) => state.contactHandler(e)}
                         />
+                        <div className="input-error">bu xana doldurulmalıdır</div>
                       </div>
                       <div className="form-group col-md-6">
                         <input
@@ -148,17 +150,31 @@ function About() {
                           className="form-control"
                           id="email"
                           name="email"
-                          placeholder="Email"
+                          placeholder="Email *"
+                          onBlur={(e) => state.contactHandler(e)}
+                        />
+                        <div className="input-error">bu xana doldurulmalıdır</div>
+                      </div>
+                      <div className="form-group col-md-6">
+                        <input
+                          type="number"
+                          className="form-control"
+                          id="phone"
+                          name="phone"
+                          placeholder="Mobil nömrə"
+                          onBlur={(e) => state.contactHandler(e)}
                         />
                       </div>
-                      <div className="form-group col-md-12">
+                      <div className="form-group col-md-6">
                         <input
                           type="text"
                           className="form-control"
                           id="subject"
                           name="subject"
-                          placeholder="Mövzu"
+                          placeholder="Mövzu *"
+                          onBlur={(e) => state.contactHandler(e)}
                         />
+                        <div className="input-error">bu xana doldurulmalıdır</div>
                       </div>
                       <div className="form-group col-md-12">
                         <textarea
@@ -166,14 +182,18 @@ function About() {
                           name="message"
                           id="message"
                           rows="1"
-                          placeholder="Məktub"
+                          placeholder="Məktub *"
+                          onBlur={(e) => state.contactHandler(e)}
                         ></textarea>
+                        <div className="input-error">bu xana doldurulmalıdır</div>
                       </div>
+                      <div className="form-group col-md-12">{state.contactSuccess? state.contactSuccess : null}</div>
                       <div className="form-group col-md-12">
                         <button
-                          type="submit"
-                          value="submit"
+                          type="button"
+                          // value="submit"
                           className="btn order_s_btn form-control"
+                          onClick={state.postContact}
                         >
                           göndər
                         </button>

@@ -14756,6 +14756,23 @@ i:before {
 ============================================================================================ */
 /* Contact Us Area css
 ============================================================================================ */
+.contact_form_area .form-group{
+  position: relative;
+}
+.contact_form_area .input-error{
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  font-size: 12px;
+  color: red;
+}
+.contact_form_area .input-div-error .input-error{
+  display: block !important;
+}
+.contact_form_area .input-div-error input, .contact_form_area .input-div-error textarea{
+  border: 1px solid red !important;
+}
 .contact_form_area .main_title {
   padding-bottom: 55px;
 }
