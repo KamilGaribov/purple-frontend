@@ -309,7 +309,8 @@ class Provider extends Component {
       if(this.state.cInput.message == null || this.state.cInput.message == ""){
         return document.querySelector(".contact_form_area textarea").parentElement.classList.add("input-div-error")
       }
-      let url = `http://192.168.31.51:8000/contact/`;
+      // let url = `http://192.168.31.51:8000/contact/`;
+      let url = `http://api.purplecakeboutique.az/contact/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
