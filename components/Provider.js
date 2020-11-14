@@ -321,7 +321,7 @@ class Provider extends Component {
           document.querySelector(".contact_form_area textarea").value = null
           this.setState({contactSuccess: "Mesajınız uğurla göndərildi."})
         })
-        .catch((error) => console.error("Error:", error));
+        .catch((error) => this.setState({contactSuccess: "Xəta baş verdi."}));
     },
     contactHandler: (e) => {
       const { name, value } = e.target;

@@ -28,9 +28,13 @@ function Navbar(props) {
               <i className="fa fa-phone" aria-hidden="true"></i>
               <span>+994 51 746 8384</span>
             </a>
-            <a href="tel:+994517468384" className="call-mob">
+            <a className="call-mob callmob" href="tel:+994517468384">
               <i className="fa fa-phone" aria-hidden="true"></i>
               <span>+994 51 746 8384</span>
+            </a>
+            <a className="call-mob" href="https://api.whatsapp.com/send?phone=+994507468384">
+              <i className="fa fa-whatsapp" aria-hidden="true"></i>
+              <span>watsapp</span>
             </a>
             <a onClick={showMap}>
               <i className="fa fa-map-marker" aria-hidden="true"></i>

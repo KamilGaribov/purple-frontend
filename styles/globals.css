@@ -17120,6 +17120,10 @@ i:before {
     margin-left: 15px;
     /* margin-top: -14px; */
   }
+  .top_header_area .float-left a:nth-child(2) {
+    margin-left: 0px !important;
+    /* margin-top: -14px; */
+  }
   .top_header_area .float-right a {
     margin-right: 15px;
   }
