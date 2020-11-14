@@ -79,7 +79,7 @@ function Footer() {
           <div className="copyright_inner">
             <div className="float-left">
               <h5>
-                © Copyright Garibov Agency. All rights
+                © Copyright Cube Agency. All rights
                 reserved.
               </h5>
             </div>
