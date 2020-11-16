@@ -183,7 +183,7 @@ export default function Home({posts, types}) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}homepageproduct/`);
+  const res = await fetch(`${apiUrl}vitrin/`);
   const posts = await res.json();
   const res2 = await fetch(`${apiUrl}homepageproductcount/`);
   const posts2 = await res2.json();
