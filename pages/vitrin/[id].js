@@ -164,7 +164,7 @@ function Post({ post }) {
 const vitrinApi = "http://web:8000/cake/";
 
 export async function getStaticPaths() {
-  const res = await fetch(`${apiUrl}cake/`);
+  const res = await fetch(`${apiUrl}vitrin/`);
   const posts = await res.json();
   const paths = posts.map((post) => {
     return { params: { id: post.id.toString() } };
@@ -173,7 +173,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${apiUrl}cake/${params.id}/`);
+  const res = await fetch(`${apiUrl}vitrin/${params.id}/`);
   const post = await res.json();
 
   return { props: { post } };

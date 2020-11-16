@@ -23,23 +23,8 @@ function About() {
                 <div className="our_bakery_text">
                   <h2>Our Bakery Approach </h2>
                   <h6>
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore veritatis et
-                    quasi architecto beatae vitae dicta sunt explicabo.
+                  "Siz xəyal qurun, biz onu gözəl şəkildə gerçəkləşdirək" fikrinə əsaslanaraq son illərdə insanlarda böyük tələbat doğuran bu xidmət sahəsi üzrə 2009-cu ildən etibarən Bakı şəhərində fəaliyyət göstəririk. Məhsullar hər kəsə özəl hazırlanır. Tamamən fərdi zövqlərə cavab vermək niyyətimiz və böyük təcrübəmiz bizə sənət əsəri olan tortları hazırlamağa imkan verir. Təqdim etdiyimiz hər tortun müştərilərimiz tərəfindən də əsl incəsənət nümunəsi kimi qəbul olunması  bizim üçün xüsusilə xoşdur.
                   </h6>
-                  <p>
-                    Siz hayal gucunuzu zorlayin bizde sanatsalini yapalim
-                    sozunden yola cikarak son yillarda insanlardan buyuk taleb
-                    goren bu hizmet sektoruyle yaklasik 2009 yilindan bu yana
-                    Bakude faaliyetlerimizi surdurmekteyiz.Tasarimlar sadece
-                    kisiye ozeldir .Tamamen ayricalikli tatlar pesinde olmamiz
-                    ve tasarim konusundaki gecmise yonelik tecrubelerimiz bizi
-                    sanatsal pastalari yaratmaya zorlamistir. Ortaya cikan her
-                    pastanin gercek anlamda birer gorsel show olarak
-                    musterilemiz tarafindan da kabul gormesi ayri bir mutluluk
-                    kaynagidir bizim icin. ilginizi cekebilecek dallarimiz…
-                  </p>
                 </div>
                 <div className="row our_bakery_image">
                   <div className="col-md-4 col-6">
@@ -226,7 +211,7 @@ function About() {
                       <div className="contact_d_item">
                         <h3>İş saatları :</h3>
                         <p>9:00 – 22:00</p>
-                        <p>Bazar ertəsi – Bazar</p>
+                        <p>Hər gün</p>
                       </div>
                     </div>
                   </div>

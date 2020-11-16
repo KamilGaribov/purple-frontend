@@ -107,7 +107,7 @@ function Navbar(props) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/marsipantortlar">
+                  <Link href="/marsipan">
                     <a
                       onClick={changeUrl}
                       className={

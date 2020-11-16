@@ -36,7 +36,7 @@ function Card(props) {
         </div>
       </div>
       <span id="item-type">
-        {item.category.name ? item.category.name : null}
+        {item.category ? item.category.name : null}
       </span>
     </div>
   );

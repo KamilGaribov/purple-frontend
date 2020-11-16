@@ -42,10 +42,7 @@ function Footer() {
                 </div>
                 <ul className="list_style">
                   <li>
-                    <a href="#">Bazar er. - Cümə: 9:00 - 22:00</a>
-                  </li>
-                  <li>
-                    <a href="#">Bazar: 12:00 - 20:00</a>
+                    <a href="#">Hər gün: 9:00 - 22:00</a>
                   </li>
                 </ul>
               </aside>

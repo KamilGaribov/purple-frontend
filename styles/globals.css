@@ -12298,8 +12298,9 @@ i:before {
   position: absolute;
   right: 60px;
   top: 40px;
-  width: auto;
   width: 450px;
+  width: auto;
+  max-width: 480px;
   height: auto;
   color: #454545;
   font-family: "Montserrat", sans-serif;

@@ -4,7 +4,7 @@ const Context = React.createContext();
 
 class Provider extends Component {
   state = {
-    perPage: 2,
+    perPage: 4,
     currentPage: 1,
     currentType: "hamısı",
     sortedData: null,
@@ -13,7 +13,7 @@ class Provider extends Component {
     sortData: (data, e) => {
       let type = e.target.innerHTML.toLowerCase();
       this.setState({ currentType: type });
-      let perPage = 2;
+      let perPage = 4;
       let pagesSorted = [];
       if (type == "hamısı") {
         for (let i = 1; i <= Math.ceil(data.length / perPage); i++) {

@@ -5,10 +5,12 @@ import { Consumer } from "../components/Provider";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Search from "../components/search";
-import { Marker } from "../components/variables";
+import Card from "../components/card2";
+import { Marker, apiUrl } from "../components/variables";
 
-export default function Home() {
-  console.log("home")
+export default function Home({posts, types}) {
+  console.log(posts)
+  console.log(types)
   return (
     <Consumer>
       {({ state }) => (
@@ -16,10 +18,8 @@ export default function Home() {
           <Navbar state={state} />
           <section className="main_slider_area">
             <div className="cover-text">
-              <span id="currentpx"></span> <br />
-              <span id="test-logo">Siz</span> hayal gücünüzü zorlayın ...
-              <br />
-              biz de sanatsalını yapalım
+              Siz xəyal qurun, biz onu <br/>
+              gözəl şəkildə gerçəkləşdirək.
             </div>
           </section>
           <section className="welcome_bakery_area cake_feature_main p_100">
@@ -29,102 +29,17 @@ export default function Home() {
                 <h5>gündəlik bişirilən tort və şirniyyatlarımız</h5>
               </div>
               <div className="cake_feature_row row">
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-1.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-2.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-3.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-4.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-1.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-2.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-3.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-4 col-6">
-                  <div className="cake_feature_item">
-                    <div className="cake_img">
-                      <img src="img/cake-feature/c-feature-4.jpg" alt="" />
-                    </div>
-                    <div className="cake_text">
-                      <h4>29</h4>
-                      <h3>Şirniyyat</h3>
-                      <a className="pest_btn">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
+                {posts.map((item, i) => {
+                  return (
+                    <Card
+                      key={i}
+                      item={item}
+                      pageType={types[i]}
+                      addCart={state.addCart}
+                      // avatar={`../../static/images/stadion/${i}.jpg`}
+                    />
+                  );
+                })}
               </div>
             </div>
           </section>
@@ -265,4 +180,31 @@ export default function Home() {
       )}
     </Consumer>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch(`${apiUrl}homepageproduct/`);
+  const posts = await res.json();
+  const res2 = await fetch(`${apiUrl}homepageproductcount/`);
+  const posts2 = await res2.json();
+  const types = []
+  for(let i=0; i<posts2[0].vitrin; i++){
+    types.push("vitrin")
+  }
+  for(let i=0; i<posts2[0].marsipan; i++){
+    types.push("marsipan")
+  }
+  for(let i=0; i<posts2[0].flower; i++){
+    types.push("flower")
+  }
+  for(let i=0; i<posts2[0].xonca; i++){
+    types.push("xonca")
+  }
+  return {
+    props: {
+      posts: posts.slice(0,8),
+      types
+    },
+    revalidate: 5,
+  };
 }

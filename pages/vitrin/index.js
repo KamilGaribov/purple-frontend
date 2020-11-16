@@ -8,8 +8,7 @@ import Card from "../../components/card";
 import {apiUrl, } from "../../components/variables";
 
 function CakeList({ posts }) {
-  console.log("posts: ", posts)
-  var perPage = 2;
+  var perPage = 4;
   var pages = [];
   for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
     pages.push(i);
@@ -319,7 +318,7 @@ function CakeList({ posts }) {
 const vitrinApi = "http://web:8000/cake/"
 
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}cake/`)
+  const res = await fetch(`${apiUrl}vitrin/`)
   const posts = await res.json();
   return {
     props: {
