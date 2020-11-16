@@ -8,9 +8,7 @@ import Search from "../components/search";
 import Card from "../components/card2";
 import { Marker, apiUrl } from "../components/variables";
 
-export default function Home({posts, types}) {
-  console.log(posts)
-  console.log(types)
+export default function Home() {
   return (
     <Consumer>
       {({ state }) => (
@@ -29,7 +27,7 @@ export default function Home({posts, types}) {
                 <h5>gündəlik bişirilən tort və şirniyyatlarımız</h5>
               </div>
               <div className="cake_feature_row row">
-                {posts.map((item, i) => {
+                {/* {posts.map((item, i) => {
                   return (
                     <Card
                       key={i}
@@ -39,7 +37,7 @@ export default function Home({posts, types}) {
                       // avatar={`../../static/images/stadion/${i}.jpg`}
                     />
                   );
-                })}
+                })} */}
               </div>
             </div>
           </section>
@@ -182,29 +180,29 @@ export default function Home({posts, types}) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}vitrin/`);
-  const posts = await res.json();
-  const res2 = await fetch(`${apiUrl}homepageproductcount/`);
-  const posts2 = await res2.json();
-  const types = []
-  for(let i=0; i<posts2[0].vitrin; i++){
-    types.push("vitrin")
-  }
-  for(let i=0; i<posts2[0].marsipan; i++){
-    types.push("marsipan")
-  }
-  for(let i=0; i<posts2[0].flower; i++){
-    types.push("flower")
-  }
-  for(let i=0; i<posts2[0].xonca; i++){
-    types.push("xonca")
-  }
-  return {
-    props: {
-      posts: posts.slice(0,8),
-      types
-    },
-    revalidate: 5,
-  };
-}
+// export async function getStaticProps() {
+//   const res = await fetch(`${apiUrl}vitrin/`);
+//   const posts = await res.json();
+//   const res2 = await fetch(`${apiUrl}homepageproductcount/`);
+//   const posts2 = await res2.json();
+//   const types = []
+//   for(let i=0; i<posts2[0].vitrin; i++){
+//     types.push("vitrin")
+//   }
+//   for(let i=0; i<posts2[0].marsipan; i++){
+//     types.push("marsipan")
+//   }
+//   for(let i=0; i<posts2[0].flower; i++){
+//     types.push("flower")
+//   }
+//   for(let i=0; i<posts2[0].xonca; i++){
+//     types.push("xonca")
+//   }
+//   return {
+//     props: {
+//       posts: posts.slice(0,8),
+//       types
+//     },
+//     revalidate: 5,
+//   };
+// }
