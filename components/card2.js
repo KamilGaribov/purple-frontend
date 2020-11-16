@@ -3,9 +3,9 @@ import Link from "next/link";
 function Card(props) {
   const { item, addCart, pageType } = props;
   if (item.image) {
-    var src = item.image;
+    var src = "/" + item.image;
   } else {
-    var src = "img/cake-feature/c-feature-9.jpg";
+    var src = "/img/cake-feature/c-feature-9.jpg";
   }
   return (
     <div className="col-lg-3 col-md-4 col-6" id="item-card">

@@ -281,7 +281,6 @@ class Provider extends Component {
     },
     cPost: "",
     postContact: () => {
-      console.log("_", this.state.cPost);
       let form = {
         method: "POST",
         body: JSON.stringify({
@@ -295,8 +294,6 @@ class Provider extends Component {
           "Content-type": "application/json; charset=UTF-8",
         },
       };
-      console.log("form: ", form)
-      console.log("input: ", this.state.cInput)
       if(this.state.cInput.name == null || this.state.cInput.name == ""){
         return document.querySelector(".contact_form_area input[name=name]").parentElement.classList.add("input-div-error")
       }
@@ -325,8 +322,6 @@ class Provider extends Component {
     },
     contactHandler: (e) => {
       const { name, value } = e.target;
-      console.log("name: ", name);
-      console.log("value: ", value);
       if(name != "message"){
         document.querySelector(`.contact_form_area input[name=${name}`).parentElement.classList.remove("input-div-error")
       }

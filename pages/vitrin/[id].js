@@ -6,13 +6,14 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
 import { apiUrl } from "../../components/variables";
+import Card from "../../components/card2";
 
 function Post({ post }) {
   const router = useRouter();
   const back = () => {
     router.back();
   };
-  const src = "/" + post.image
+  const src = "/" + post.image;
   return (
     <div>
       <Head>
@@ -30,9 +31,7 @@ function Post({ post }) {
                       <img
                         className="img-fluid"
                         src={
-                          post.image
-                            ? src
-                            : "/img/cake-feature/c-feature-9.jpg"
+                          post.image ? src : "/img/cake-feature/c-feature-9.jpg"
                         }
                         alt=""
                       />
@@ -87,62 +86,34 @@ function Post({ post }) {
                   <h2>Oxşar məhsullar</h2>
                 </div>
                 <div className="row similar_product_inner">
-                  <div className="col-lg-3 col-md-4 col-6">
-                    <div className="cake_feature_item">
-                      <div className="cake_img">
-                        <img src="/img/cake-feature/c-feature-1.jpg" alt="" />
-                      </div>
-                      <div className="cake_text">
-                        <h4>$29</h4>
-                        <h3>Şirniyyat</h3>
-                        <a className="pest_btn" href="#">
-                          Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-6">
-                    <div className="cake_feature_item">
-                      <div className="cake_img">
-                        <img src="/img/cake-feature/c-feature-2.jpg" alt="" />
-                      </div>
-                      <div className="cake_text">
-                        <h4>$29</h4>
-                        <h3>Şirniyyat</h3>
-                        <a className="pest_btn" href="#">
-                          Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-6">
-                    <div className="cake_feature_item">
-                      <div className="cake_img">
-                        <img src="/img/cake-feature/c-feature-3.jpg" alt="" />
-                      </div>
-                      <div className="cake_text">
-                        <h4>$29</h4>
-                        <h3>Şirniyyat</h3>
-                        <a className="pest_btn" href="#">
-                          Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-6">
-                    <div className="cake_feature_item">
-                      <div className="cake_img">
-                        <img src="/img/cake-feature/c-feature-4.jpg" alt="" />
-                      </div>
-                      <div className="cake_text">
-                        <h4>$29</h4>
-                        <h3>Şirniyyat</h3>
-                        <a className="pest_btn" href="#">
-                          Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  {post.similar1 ? (
+                    <Card
+                      item={post.similar1}
+                      pageType={"vitrin"}
+                      addCart={state.addCart}
+                    />
+                  ) : null}
+                  {post.similar2 ? (
+                    <Card
+                      item={post.similar2}
+                      pageType={"vitrin"}
+                      addCart={state.addCart}
+                    />
+                  ) : null}
+                  {post.similar3 ? (
+                    <Card
+                      item={post.similar3}
+                      pageType={"vitrin"}
+                      addCart={state.addCart}
+                    />
+                  ) : null}
+                  {post.similar4 ? (
+                    <Card
+                      item={post.similar4}
+                      pageType={"vitrin"}
+                      addCart={state.addCart}
+                    />
+                  ) : null}
                 </div>
               </div>
             </section>
