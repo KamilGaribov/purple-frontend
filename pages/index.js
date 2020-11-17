@@ -9,8 +9,6 @@ import Card from "../components/card2";
 import { Marker, apiUrl } from "../components/variables";
 
 export default function Home({posts, types}) {
-  console.log(posts)
-  console.log(types)
   return (
     <Consumer>
       {({ state }) => (
