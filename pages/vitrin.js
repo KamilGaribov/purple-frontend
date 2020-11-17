@@ -8,6 +8,7 @@ import Card from "../components/card";
 import {apiUrl, } from "../components/variables";
 
 function CakeList({ posts }) {
+  console.log("posts: ",posts)
   var perPage = 4;
   var pages = [];
   for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
@@ -324,7 +325,7 @@ export async function getStaticProps() {
     props: {
       posts,
     },
-    revalidate: 5,
+    // revalidate: 5,
   };
 }
 
