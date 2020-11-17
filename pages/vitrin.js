@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Consumer } from "../../components/Provider";
-import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
-import Search from "../../components/search";
-import Card from "../../components/card";
-import {apiUrl, } from "../../components/variables";
+import { Consumer } from "../components/Provider";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import Search from "../components/search";
+import Card from "../components/card";
+import {apiUrl, } from "../components/variables";
 
 function CakeList({ posts }) {
   var perPage = 4;
