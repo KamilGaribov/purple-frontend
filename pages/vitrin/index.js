@@ -1,20 +1,25 @@
-import Head from "next/head";
-import Link from "next/link";
-import { Consumer } from "../../components/Provider";
-import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
-import Search from "../../components/search";
-import Card from "../../components/card";
-import {apiUrl, } from "../../components/variables";
+import Head from 'next/head';
+import Link from 'next/link';
+import { Consumer } from '../../components/Provider';
+import Navbar from '../../components/navbar';
+import Footer from '../../components/footer';
+import Search from '../../components/search';
+import Card from '../../components/card';
+import { apiUrl } from '../../components/variables';
+
+const perPage = 4;
 
 function CakeList({ posts }) {
-  console.log("posts: ", posts)
-  var perPage = 4;
-  var pages = [];
-  for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
+  console.log('posts: ', posts);
+  let pages = [];
+  const postsCount = posts.length;
+
+  for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
     pages.push(i);
   }
-  var pagesCount = pages.length;
+
+  let pagesCount = pages.length;
+
   return (
     <div>
       <Head>
@@ -41,7 +46,7 @@ function CakeList({ posts }) {
                                 <Card
                                   key={item.id}
                                   item={item}
-                                  pageType={"vitrin"}
+                                  pageType={'vitrin'}
                                   addCart={state.addCart}
                                   // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
@@ -58,7 +63,7 @@ function CakeList({ posts }) {
                                 <Card
                                   key={item.id}
                                   item={item}
-                                  pageType={"vitrin"}
+                                  pageType={'vitrin'}
                                   addCart={state.addCart}
                                   // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
@@ -85,9 +90,7 @@ function CakeList({ posts }) {
                                     <li
                                       key={i}
                                       className={
-                                        i == state.currentPage
-                                          ? "page-item active"
-                                          : "page-item"
+                                        i == state.currentPage ? 'page-item active' : 'page-item'
                                       }
                                       onClick={() => {
                                         state.changePage(i, pagesCount);
@@ -104,9 +107,7 @@ function CakeList({ posts }) {
                                     <li
                                       key={i}
                                       className={
-                                        i == state.currentPage
-                                          ? "page-item active"
-                                          : "page-item"
+                                        i == state.currentPage ? 'page-item active' : 'page-item'
                                       }
                                       onClick={() => {
                                         state.changePage(i, pagesCount);
@@ -137,11 +138,7 @@ function CakeList({ posts }) {
                     <div className="product_left_sidebar">
                       <aside className="left_sidebar search_widget">
                         <div className="input-group" id="search-cake">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="axtar.."
-                          />
+                          <input type="text" className="form-control" placeholder="axtar.." />
                           <div className="input-group-append">
                             <button className="btn" type="button">
                               <i className="fa fa-search"></i>
@@ -156,9 +153,7 @@ function CakeList({ posts }) {
                         <ul className="list_style" id="cake-types">
                           <li>
                             <a
-                              className={
-                                state.currentType == "hamısı" ? "active" : null
-                              }
+                              className={state.currentType == 'hamısı' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -168,9 +163,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "tort" ? "active" : null
-                              }
+                              className={state.currentType == 'tort' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -180,9 +173,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "mini tort" ? "active" : null
-                              }
+                              className={state.currentType == 'mini tort' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -192,9 +183,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "cupcake" ? "active" : null
-                              }
+                              className={state.currentType == 'cupcake' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -204,9 +193,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "ekler" ? "active" : null
-                              }
+                              className={state.currentType == 'ekler' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -216,9 +203,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "tartalet" ? "active" : null
-                              }
+                              className={state.currentType == 'tartalet' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -228,9 +213,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "kurabiyə" ? "active" : null
-                              }
+                              className={state.currentType == 'kurabiyə' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -240,9 +223,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "paxlava" ? "active" : null
-                              }
+                              className={state.currentType == 'paxlava' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -252,9 +233,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "novruz" ? "active" : null
-                              }
+                              className={state.currentType == 'novruz' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -264,9 +243,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "börək" ? "active" : null
-                              }
+                              className={state.currentType == 'börək' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -276,9 +253,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "qarışıq" ? "active" : null
-                              }
+                              className={state.currentType == 'qarışıq' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -288,9 +263,7 @@ function CakeList({ posts }) {
                           </li>
                           <li>
                             <a
-                              className={
-                                state.currentType == "digər" ? "active" : null
-                              }
+                              className={state.currentType == 'digər' ? 'active' : null}
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
@@ -314,29 +287,25 @@ function CakeList({ posts }) {
   );
 }
 
-
 // const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/"
+const vitrinApi = 'http://web:8000/cake/';
 
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}vitrin/`)
-  if(res){
-    console.log(res)
+  const props = { posts: [] };
+
+  try {
+    const res = await fetch(`${apiUrl}vitrin/`);
+    const posts = await res.json();
+
+    console.log('posts', posts);
+
+    props.posts = posts;
+  } catch (error) {
+    console.log('error', error);
   }
-  else{
-    console.log("not res")
-  }
-  const posts = await res.json();
-  if(posts){
-    console.log(posts)
-  }
-  else{
-    console.log("not posts")
-  }
+
   return {
-    props: {
-      posts,
-    },
+    props,
     revalidate: 5,
   };
 }

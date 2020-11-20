@@ -1,19 +1,24 @@
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Consumer } from "../../components/Provider";
-import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
-import Search from "../../components/search";
-import { apiUrl } from "../../components/variables";
-import Card from "../../components/card2";
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Consumer } from '../../components/Provider';
+import Navbar from '../../components/navbar';
+import Footer from '../../components/footer';
+import Search from '../../components/search';
+import { apiUrl } from '../../components/variables';
+import Card from '../../components/card2';
 
-function Post({ post }) {
+function Post({ post } = {}) {
   const router = useRouter();
   const back = () => {
     router.back();
   };
-  const src = "/" + post.image;
+  const src = '/' + post.image;
+
+  if (!post) {
+    return null;
+  }
+
   return (
     <div>
       <Head>
@@ -30,9 +35,7 @@ function Post({ post }) {
                     <div className="product_img">
                       <img
                         className="img-fluid"
-                        src={
-                          post.image ? src : "/img/cake-feature/c-feature-9.jpg"
-                        }
+                        src={post.image ? src : '/img/cake-feature/c-feature-9.jpg'}
                         alt=""
                       />
                     </div>
@@ -48,8 +51,7 @@ function Post({ post }) {
                       </p>
                       {post.discount ? (
                         <p>
-                          <b>Qiymət:</b>{" "}
-                          <span className="product_discount">{post.price}</span>{" "}
+                          <b>Qiymət:</b> <span className="product_discount">{post.price}</span>{' '}
                           {post.discount} azn
                         </p>
                       ) : (
@@ -64,7 +66,7 @@ function Post({ post }) {
                       <a
                         className="pink_more"
                         onClick={() => {
-                          state.addCart(post, "vitrin");
+                          state.addCart(post, 'vitrin');
                         }}
                       >
                         səbətə əlavə et
@@ -87,32 +89,16 @@ function Post({ post }) {
                 </div>
                 <div className="row similar_product_inner">
                   {post.similar1 ? (
-                    <Card
-                      item={post.similar1}
-                      pageType={"vitrin"}
-                      addCart={state.addCart}
-                    />
+                    <Card item={post.similar1} pageType={'vitrin'} addCart={state.addCart} />
                   ) : null}
                   {post.similar2 ? (
-                    <Card
-                      item={post.similar2}
-                      pageType={"vitrin"}
-                      addCart={state.addCart}
-                    />
+                    <Card item={post.similar2} pageType={'vitrin'} addCart={state.addCart} />
                   ) : null}
                   {post.similar3 ? (
-                    <Card
-                      item={post.similar3}
-                      pageType={"vitrin"}
-                      addCart={state.addCart}
-                    />
+                    <Card item={post.similar3} pageType={'vitrin'} addCart={state.addCart} />
                   ) : null}
                   {post.similar4 ? (
-                    <Card
-                      item={post.similar4}
-                      pageType={"vitrin"}
-                      addCart={state.addCart}
-                    />
+                    <Card item={post.similar4} pageType={'vitrin'} addCart={state.addCart} />
                   ) : null}
                 </div>
               </div>
@@ -132,22 +118,37 @@ function Post({ post }) {
 // const res = await fetch(`http://web:8000/api/cake/${params.id}/`);
 // const res = await fetch(`https://5f8ede96693e730016d7a9be.mockapi.io/cake/all/${params.id}`);
 // const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/";
+const vitrinApi = 'http://web:8000/cake/';
 
 export async function getStaticPaths() {
-  const res = await fetch(`${apiUrl}vitrin/`);
-  const posts = await res.json();
-  const paths = posts.map((post) => {
-    return { params: { id: post.id.toString() } };
-  });
+  let paths = [];
+
+  try {
+    const res = await fetch(`${apiUrl}vitrin/`);
+    const posts = await res.json();
+
+    paths = posts.map((post) => {
+      return { params: { id: post.id.toString() } };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${apiUrl}vitrin/${params.id}/`);
-  const post = await res.json();
+  const props = { post: {} };
+  try {
+    const res = await fetch(`${apiUrl}vitrin/${params.id}/`);
+    const post = await res.json();
 
-  return { props: { post } };
+    props.post = post;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return { props };
 }
 
 export default Post;
