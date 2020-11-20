@@ -6,30 +6,26 @@ function Footer() {
           <div className="row footer_wd_inner">
             <div className="col-lg-3 col-6">
               <aside className="f_widget f_about_widget">
-                <img src="/img/purplelogo1.png" alt="" />
+                <img src="/img/purple_logo123.png" alt="" />
                 <p>
                   At vero eos et accusamus et iusto odio dignissimos ducimus qui
                   bland itiis praesentium voluptatum deleniti atque corrupti.
                 </p>
                 <ul className="nav">
                   <li>
-                    <a href="#">
+                    <a
+                      href="https://www.facebook.com/purplecakeboutiquebaku"
+                      target="_blank"
+                    >
                       <i className="fa fa-facebook"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
-                      <i className="fa fa-linkedin"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fa fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fa fa-google-plus"></i>
+                    <a
+                      href="https://www.instagram.com/purplecakeboutique/"
+                      target="_blank"
+                    >
+                      <i className="fa fa-instagram"></i>
                     </a>
                   </li>
                 </ul>
@@ -53,8 +49,8 @@ function Footer() {
                   <h3>Ünvan</h3>
                 </div>
                 <p>
-                Bakı şəhəri, Nərimanov rayonu, Həsənoğlu 4. <br/>
-                Heydər Əliyev mərkəzinin arxası.
+                  Bakı şəhəri, Nərimanov rayonu, Həsənoğlu 4. <br />
+                  Heydər Əliyev mərkəzinin arxası.
                 </p>
               </aside>
             </div>
@@ -75,10 +71,7 @@ function Footer() {
         <div className="container">
           <div className="copyright_inner">
             <div className="float-left">
-              <h5>
-                © Copyright Cube Agency. All rights
-                reserved.
-              </h5>
+              <h5>© Copyright Cube Agency. All rights reserved.</h5>
             </div>
           </div>
         </div>
