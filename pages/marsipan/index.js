@@ -17,7 +17,7 @@ function CakeList({ posts }) {
   return (
     <div>
       <Head>
-        <title>Vitrin</title>
+        <title>Marsipan tortları</title>
       </Head>
       <Consumer>
         {({ state }) => (
