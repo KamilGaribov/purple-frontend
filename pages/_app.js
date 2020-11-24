@@ -10,30 +10,30 @@ import { Marker } from "../components/variables";
 
 // function MyApp({ Component, pageProps }) {
 class MyApp extends App {
-  // componentDidMount() {
-  //   var decodedCookie = decodeURIComponent(document.cookie);
-  //   var cookies = decodedCookie.split("; ");
-  //   var basket = document.querySelector("#basketCount");
-  //   var count = 0;
-  //   for (let i = 0; i < cookies.length; i++) {
-  //     if (cookies[i].split("=")[1] == "added to shop cart") {
-  //       count++;
-  //     }
-  //   }
-  //   basket.innerHTML = count;
-  //   Router.events.on("routeChangeComplete", (url) => {
-  //     var decodedCookie = decodeURIComponent(document.cookie);
-  //     var cookies = decodedCookie.split("; ");
-  //     var basket = document.querySelector("#basketCount");
-  //     var count = 0;
-  //     for (let i = 0; i < cookies.length; i++) {
-  //       if (cookies[i].split("=")[1] == "added to shop cart") {
-  //         count++;
-  //       }
-  //     }
-  //     basket.innerHTML = count;
-  //   });
-  // }
+  componentDidMount() {
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookies = decodedCookie.split("; ");
+    var basket = document.querySelector("#basketCount");
+    var count = 0;
+    for (let i = 0; i < cookies.length; i++) {
+      if (cookies[i].split("=")[1] == "added to shop cart") {
+        count++;
+      }
+    }
+    basket.innerHTML = count;
+    Router.events.on("routeChangeComplete", (url) => {
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var cookies = decodedCookie.split("; ");
+      var basket = document.querySelector("#basketCount");
+      var count = 0;
+      for (let i = 0; i < cookies.length; i++) {
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          count++;
+        }
+      }
+      basket.innerHTML = count;
+    });
+  }
   render() {
     const { Component, pageProps } = this.props;
     return (
