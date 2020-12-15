@@ -550,7 +550,7 @@ class Provider extends Component {
       console.log("post: ");
       console.log("_", this.state.query);
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("POST", "https://e-commerce.kapitalbank.az/index.jsp?");
+      xmlhttp.open("GET", "https://e-commerce.kapitalbank.az/index.jsp?", true);
       var xmlDoc;
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
