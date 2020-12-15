@@ -288,45 +288,62 @@ class Provider extends Component {
           email: this.state.cInput.email,
           phone: this.state.cInput.phone,
           subject: this.state.cInput.subject,
-          message: this.state.cInput.message
+          message: this.state.cInput.message,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       };
-      if(this.state.cInput.name == null || this.state.cInput.name == ""){
-        return document.querySelector(".contact_form_area input[name=name]").parentElement.classList.add("input-div-error")
+      if (this.state.cInput.name == null || this.state.cInput.name == "") {
+        return document
+          .querySelector(".contact_form_area input[name=name]")
+          .parentElement.classList.add("input-div-error");
       }
-      if(this.state.cInput.email == null || this.state.cInput.email == ""){
-        return document.querySelector(".contact_form_area input[name=email]").parentElement.classList.add("input-div-error")
+      if (this.state.cInput.email == null || this.state.cInput.email == "") {
+        return document
+          .querySelector(".contact_form_area input[name=email]")
+          .parentElement.classList.add("input-div-error");
       }
-      if(this.state.cInput.subject == null || this.state.cInput.subject == ""){
-        return document.querySelector(".contact_form_area input[name=subject]").parentElement.classList.add("input-div-error")
+      if (
+        this.state.cInput.subject == null ||
+        this.state.cInput.subject == ""
+      ) {
+        return document
+          .querySelector(".contact_form_area input[name=subject]")
+          .parentElement.classList.add("input-div-error");
       }
-      if(this.state.cInput.message == null || this.state.cInput.message == ""){
-        return document.querySelector(".contact_form_area textarea").parentElement.classList.add("input-div-error")
+      if (
+        this.state.cInput.message == null ||
+        this.state.cInput.message == ""
+      ) {
+        return document
+          .querySelector(".contact_form_area textarea")
+          .parentElement.classList.add("input-div-error");
       }
       // let url = `http://192.168.31.51:8000/contact/`;
       let url = `http://api.purplecakeboutique.az/contact/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
-          let inputs = document.querySelectorAll(".contact_form_area input")
-          for(let i=0; i<inputs.length; i++){
-            inputs[i].value = null
+          let inputs = document.querySelectorAll(".contact_form_area input");
+          for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = null;
           }
-          document.querySelector(".contact_form_area textarea").value = null
-          this.setState({contactSuccess: "Mesajınız uğurla göndərildi."})
+          document.querySelector(".contact_form_area textarea").value = null;
+          this.setState({ contactSuccess: "Mesajınız uğurla göndərildi." });
         })
-        .catch((error) => this.setState({contactSuccess: "Xəta baş verdi."}));
+        .catch((error) => this.setState({ contactSuccess: "Xəta baş verdi." }));
     },
     contactHandler: (e) => {
       const { name, value } = e.target;
-      if(name != "message"){
-        document.querySelector(`.contact_form_area input[name=${name}`).parentElement.classList.remove("input-div-error")
-      }
-      else{
-        document.querySelector(`.contact_form_area textarea`).parentElement.classList.remove("input-div-error")
+      if (name != "message") {
+        document
+          .querySelector(`.contact_form_area input[name=${name}`)
+          .parentElement.classList.remove("input-div-error");
+      } else {
+        document
+          .querySelector(`.contact_form_area textarea`)
+          .parentElement.classList.remove("input-div-error");
       }
       let formInput = { ...this.state.cInput };
       switch (name) {
@@ -532,6 +549,34 @@ class Provider extends Component {
     postOrderForm: () => {
       console.log("post: ");
       console.log("_", this.state.query);
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("POST", "https://e-commerce.kapitalbank.az/index.jsp?");
+      var xmlDoc;
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          xmlDoc = xmlhttp.responseXML;
+          console.log(xmlDoc);
+        }
+      };
+      xmlhttp.setRequestHeader("Content-Type", "text/xml");
+      var xml = `<?xml version="1.0" encoding="UTF-8"?>
+        <TKKPG>
+        <Request>
+           <Operation>CreateOrder</Operation>
+           <Language>RU</Language>
+           <Order>
+             <OrderType>Purchase</OrderType>
+             <Merchant>E1000010</Merchant>
+             <Amount>123456</Amount>
+             <Currency>944</Currency>
+             <Description>xxxxxxxx</Description>
+             <ApproveURL>/testshopPageReturn.jsp</ApproveURL>
+             <CancelURL>/testshopPageReturn.jsp</CancelURL>
+             <DeclineURL>/testshopPageReturn.jsp</DeclineURL>
+           </Order>
+        </Request>
+        </TKKPG>`;
+      xmlhttp.send(xml);
     },
     inputHandler: (e) => {
       const { name, value } = e.target;

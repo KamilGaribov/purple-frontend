@@ -10,7 +10,6 @@ import { apiUrl } from '../../components/variables';
 const perPage = 4;
 
 function CakeList({ posts }) {
-  console.log('posts: ', posts);
   let pages = [];
   const postsCount = posts.length;
 
@@ -297,7 +296,6 @@ export async function getStaticProps() {
     const res = await fetch(`${apiUrl}vitrin/`);
     const posts = await res.json();
 
-    console.log('posts', posts);
 
     props.posts = posts;
   } catch (error) {

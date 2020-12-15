@@ -7,7 +7,6 @@ import Search from "../components/search";
 import {apiUrl, } from "../components/variables";
 
 export default function Cafe({ posts }) {
-  console.log("kafe: ", posts)
   return (
     <Consumer>
       {({ state }) => (
@@ -42,7 +41,7 @@ export default function Cafe({ posts }) {
                       >
                         <img
                           className="d-block w-100"
-                          src={item.image}
+                          src={"/" + item.image}
                           alt="First slide"
                         />
                       </div>
