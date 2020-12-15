@@ -549,16 +549,6 @@ class Provider extends Component {
     postOrderForm: () => {
       console.log("post: ");
       console.log("_", this.state.query);
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", "https://e-commerce.kapitalbank.az/index.jsp?", true);
-      var xmlDoc;
-      xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          xmlDoc = xmlhttp.responseXML;
-          console.log(xmlDoc);
-        }
-      };
-      xmlhttp.setRequestHeader("Content-Type", "text/xml");
       var xml = `<?xml version="1.0" encoding="UTF-8"?>
         <TKKPG>
         <Request>
@@ -576,7 +566,53 @@ class Provider extends Component {
            </Order>
         </Request>
         </TKKPG>`;
-      xmlhttp.send(xml);
+      let form = {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/xml",
+        },
+        body: xml,
+      };
+      let url = `https://e-commerce.kapitalbank.az/index.jsp?`;
+      fetch(url, form)
+        .then((res) => res.json())
+        .then((response) => {
+          console.log("response: ", response)
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+        });
+      // var xmlhttp = new XMLHttpRequest();
+      // xmlhttp.open("GET", "https://e-commerce.kapitalbank.az/index.jsp?", true);
+      // var xmlDoc;
+      // xmlhttp.onreadystatechange = function () {
+      //   if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      //     xmlDoc = xmlhttp.responseXML;
+      //     console.log(xmlDoc);
+      //   }
+      //   else{
+      //     console.log("else")
+      //   }
+      // };
+      // xmlhttp.setRequestHeader("Content-Type", "text/xml");
+      // var xml = `<?xml version="1.0" encoding="UTF-8"?>
+      //   <TKKPG>
+      //   <Request>
+      //      <Operation>CreateOrder</Operation>
+      //      <Language>RU</Language>
+      //      <Order>
+      //        <OrderType>Purchase</OrderType>
+      //        <Merchant>E1000010</Merchant>
+      //        <Amount>123456</Amount>
+      //        <Currency>944</Currency>
+      //        <Description>xxxxxxxx</Description>
+      //        <ApproveURL>/testshopPageReturn.jsp</ApproveURL>
+      //        <CancelURL>/testshopPageReturn.jsp</CancelURL>
+      //        <DeclineURL>/testshopPageReturn.jsp</DeclineURL>
+      //      </Order>
+      //   </Request>
+      //   </TKKPG>`;
+      // xmlhttp.send(xml);
     },
     inputHandler: (e) => {
       const { name, value } = e.target;
