@@ -549,39 +549,50 @@ class Provider extends Component {
     postOrderForm: () => {
       console.log("post: ");
       console.log("_", this.state.query);
-      var xml = `<?xml version="1.0" encoding="UTF-8"?>
-        <TKKPG>
-        <Request>
-           <Operation>CreateOrder</Operation>
-           <Language>RU</Language>
-           <Order>
-             <OrderType>Purchase</OrderType>
-             <Merchant>E1000010</Merchant>
-             <Amount>123456</Amount>
-             <Currency>944</Currency>
-             <Description>xxxxxxxx</Description>
-             <ApproveURL>/testshopPageReturn.jsp</ApproveURL>
-             <CancelURL>/testshopPageReturn.jsp</CancelURL>
-             <DeclineURL>/testshopPageReturn.jsp</DeclineURL>
-           </Order>
-        </Request>
-        </TKKPG>`;
-      let form = {
-        method: "GET",
-        headers: {
-          "Content-Type": "text/xml",
-        },
-        body: xml,
-      };
-      let url = `https://e-commerce.kapitalbank.az/index.jsp?`;
-      fetch(url, form)
-        .then((res) => res.json())
-        .then((response) => {
-          console.log("response: ", response)
+      let url = 'https://e-commerce.kapitalbank.az/index.jsp?'
+      // let xml = 
+      fetch(url, './test.xml')
+        .then(function(resp){
+          console.log(resp.text())
         })
-        .catch((error) => {
-          console.log("error: ", error);
-        });
+        .then(function(data){
+          let parser = new DOMParser(),
+          xmlDoc = parser.parseFromString(data, 'text/xml')
+          console.log(xmlDoc.getElementsByTagName('Response')[0])
+        })
+      // var xml = `<?xml version="1.0" encoding="UTF-8"?>
+      //   <TKKPG>
+      //   <Request>
+      //      <Operation>CreateOrder</Operation>
+      //      <Language>RU</Language>
+      //      <Order>
+      //        <OrderType>Purchase</OrderType>
+      //        <Merchant>E1000010</Merchant>
+      //        <Amount>123456</Amount>
+      //        <Currency>944</Currency>
+      //        <Description>xxxxxxxx</Description>
+      //        <ApproveURL>/testshopPageReturn.jsp</ApproveURL>
+      //        <CancelURL>/testshopPageReturn.jsp</CancelURL>
+      //        <DeclineURL>/testshopPageReturn.jsp</DeclineURL>
+      //      </Order>
+      //   </Request>
+      //   </TKKPG>`;
+      // let form = {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "text/xml",
+      //   },
+      //   body: xml,
+      // };
+      // let url = `https://e-commerce.kapitalbank.az/index.jsp?`;
+      // fetch(url, form)
+      //   .then((res) => res.json())
+      //   .then((response) => {
+      //     console.log("response: ", response)
+      //   })
+      //   .catch((error) => {
+      //     console.log("error: ", error);
+      //   });
       // var xmlhttp = new XMLHttpRequest();
       // xmlhttp.open("GET", "https://e-commerce.kapitalbank.az/index.jsp?", true);
       // var xmlDoc;
