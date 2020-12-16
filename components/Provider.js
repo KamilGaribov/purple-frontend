@@ -572,11 +572,11 @@ class Provider extends Component {
       var config = {
         headers: { "Content-Type": "text/xml" },
       };
-      fetch(url)
-        .then((response) => response.text())
+      fetch(url, xml)
+        .then((response) => console.log("response.text(): ", response.text()))
         .then((textResponse) => console.log("response is ", textResponse))
         .catch((error) => {
-          console.log(error);
+          console.log("error: ", error);
         });
       // axios
       //   .post(url, xml, config)
