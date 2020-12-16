@@ -320,8 +320,8 @@ class Provider extends Component {
           .querySelector(".contact_form_area textarea")
           .parentElement.classList.add("input-div-error");
       }
-      // let url = `http://192.168.31.51:8000/contact/`;
-      let url = `http://api.purplecakeboutique.az/contact/`;
+      let url = `http://192.168.31.51:8000/contact/`;
+      // let url = `http://api.purplecakeboutique.az/contact/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
@@ -566,39 +566,22 @@ class Provider extends Component {
            </Order>
         </Request>
         </TKKPG>`;
-      // const axios = require("axios");
-      // const parseString = require("xml2js").parseString;
-      // exports.handler = function (context, event, callback) {
-      var config = {
-        headers: { "Content-Type": "text/xml" },
+      let form = {
+        body: xml,
+        method: "POST",
+        headers: {
+          "Content-Type": "text/xml",
+        },
       };
-      fetch(url, xml)
-        .then((response) => console.log("response.text(): ", response.text()))
-        .then((textResponse) => console.log("response is ", textResponse))
+      // let url = "http://192.168.31.51:8000/test/";
+      fetch(url, form)
+        .then((res) => res.json())
+        .then((response) => {
+          console.log("response: ", response);
+        })
         .catch((error) => {
           console.log("error: ", error);
         });
-      // axios
-      //   .post(url, xml, config)
-      //   .then((res) => {
-      //     callback(res.data);
-      //     console.log("res: ", res);
-      //     console.log("res.data: ", res.data);
-      //   })
-      //   .catch((err) => {
-      //     callback(err);
-      //     console.log("err: ", err);
-      //   });
-      // fetch(url, xml, config)
-      //   .then((res) => res.json())
-      //   .then((response) => {
-      //     console.log("response: ", response);
-      //     console.log("response.data: ", response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.log("error: ", error);
-      //   });
-      // };
     },
     inputHandler: (e) => {
       const { name, value } = e.target;
