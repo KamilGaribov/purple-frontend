@@ -548,20 +548,6 @@ class Provider extends Component {
     query: "?",
     postOrderForm: () => {
       console.log("post: ");
-      // var url = "https://e-commerce.kapitalbank.az/index.jsp?";
-      // const xhr = new XMLHttpRequest()
-      // xhr.onreadystatechange = function(){
-      //   if(xhr.readyState == 4){
-      //     if(xhr.status == 200){
-      //       console.log("200: ", xhr.responseText)
-      //     }
-      //     if(xhr.status == 404){
-      //       console.log("404")
-      //     }
-      //   }
-      // }
-      // xhr.open("get", "test.xml", true)
-      // xhr.send()
       var xml = `<?xml version="1.0" encoding="UTF-8"?>
         <TKKPG>
         <Request>
@@ -580,13 +566,13 @@ class Provider extends Component {
         </Request>
         </TKKPG>`;
       let form = {
-        // body: xml,
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: xml,
+        method: "POST",
+        headers: {'Content-Type': 'application/xml'},
+        // headers: {"Content-Type": "application/json",},
       };
-      let url = "http://192.168.31.51:8000/test/";
+      // let url = "http://192.168.31.51:8000/test/";
+      let url = "https://e-commerce.kapitalbank.az/index.jsp?"
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
