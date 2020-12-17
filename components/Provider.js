@@ -572,11 +572,12 @@ class Provider extends Component {
         // headers: {"Content-Type": "application/json",},
       };
       // let url = "http://192.168.31.51:8000/test/";
-      let url = "https://e-commerce.kapitalbank.az/index.jsp?"
+      // let url = "https://e-commerce.kapitalbank.az/index.jsp?"
+      let url = "https://e-commerce.kapitalbank.az:5443/Exec"
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
-          console.log("response: ", response);
+          console.log("response_: ", response);
         })
         .catch((error) => {
           console.log("error: ", error);
@@ -897,26 +898,3 @@ const Consumer = Context.Consumer;
 
 export default Provider;
 export { Consumer };
-
-// let trow = `
-//         <tr>
-//         <td>
-//         <img src="/img/product/cart-img.jpg" alt="" />
-//         </td>
-//         <td id="basket-name">${item.name}</td>
-//         <td class="basket-price">${item.price}</td>
-//         <td>
-//         <select class="product_select">
-//         <option data-display="1">1</option>
-//         <option value="2">2</option>
-//         <option value="3">3</option>
-//         <option value="4">4</option>
-//         <option value="5">5</option>
-//         </select>
-//         </td>
-//         <td class="basket-total">${item.price}</td>
-//         <td>
-//         <i class="fa fa-close"/>
-//         </td>
-//         </tr>
-//     `;
