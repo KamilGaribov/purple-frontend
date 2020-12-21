@@ -204,7 +204,7 @@ function About() {
                         <h5>
                           Email :{" "}
                           <a href="mailto:rockybd1995@gmail.com">
-                            purplecakeboutique@hotmail.com
+                            contact@purplecakeboutique.az
                           </a>
                         </h5>
                       </div>

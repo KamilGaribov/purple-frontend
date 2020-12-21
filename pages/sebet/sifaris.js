@@ -4,6 +4,7 @@ import { Consumer } from "../../components/Provider";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
+import Checkbox from "../../components/checkbox";
 
 function Order() {
   return (
@@ -43,6 +44,7 @@ function Order() {
                             maxLength="63"
                             onBlur={(e) => state.inputHandler(e)}
                           />
+                          <div className="input-error">bu xana doldurulmalıdır</div>
                         </div>
                         <div className="form-group col-md-6">
                           <label htmlFor="surname">Soyad *</label>
@@ -56,6 +58,7 @@ function Order() {
                             maxLength="63"
                             onBlur={state.inputHandler}
                           />
+                          <div className="input-error">bu xana doldurulmalıdır</div>
                         </div>
                         <div className="form-group col-md-12">
                           <label htmlFor="city">Şəhər *</label>
@@ -73,20 +76,21 @@ function Order() {
                           />
                         </div>
                         <div className="form-group col-md-12">
-                          <label htmlFor="adress">Ünvan *</label>
+                          <label htmlFor="address">Ünvan *</label>
                           <input
                             type="text"
                             className="form-control"
-                            id="adress"
-                            name="adress"
+                            id="address"
+                            name="address"
                             placeholder="Nərimanov rayonu, Həsənoğlu 4"
                             spellCheck="false"
                             maxLength="127"
                             onBlur={state.inputHandler}
                           />
+                          <div className="input-error">bu xana doldurulmalıdır</div>
                         </div>
                         <div className="form-group col-md-12">
-                          <label htmlFor="adress2">Ünvan qeyd</label>
+                          <label htmlFor="address2">Ünvan qeyd</label>
                           <input
                             type="text"
                             className="form-control"
@@ -109,25 +113,27 @@ function Order() {
                             spellCheck="false"
                             onBlur={state.inputHandler}
                           />
+                          <div className="input-error">bu xana doldurulmalıdır</div>
                         </div>
                         <div className="form-group col-md-6">
                           <label htmlFor="phone">Mobil nömrə *</label>
                           <input
                             type="number"
                             className="form-control"
-                            id="phone"
-                            name="phone"
+                            id="number"
+                            name="number"
                             placeholder="Mobil nömrə"
                             spellCheck="false"
                             onBlur={state.inputHandler}
                           />
+                          <div className="input-error">bu xana doldurulmalıdır</div>
                         </div>
                         <div className="form-group col-md-12">
-                          <label htmlFor="phone">Qeyd</label>
+                          <label htmlFor="note">Qeyd</label>
                           <textarea
                             className="form-control"
-                            name="message"
-                            id="message"
+                            name="note"
+                            id="note"
                             rows="1"
                             placeholder="Qeyd"
                             spellCheck="false"
@@ -135,7 +141,43 @@ function Order() {
                             onBlur={state.inputHandler}
                           ></textarea>
                         </div>
-                        <a className="pink_more form-submit" onClick={state.postOrderForm}>Növbəti</a>
+                        <div className="payment-control form-group col-md-12">
+                          <ul>
+                            <li>Məhsul Bakı şəhəri daxilində 1 saat ərzində ünvana çatdırılır</li>
+                            <li>Çatdırılma pulsuzdur</li>
+                            <li>Məhsul geri qaytarılmır</li>
+                            <li>Ödəniş kart vasitəsi ilə qəbul olunur</li>
+                            <li>Qaynar xətt: +994 51 746 8384</li>
+                          </ul>
+                          <div className="payment-cart">
+                            {/* <span>Kredit kartı</span> */}
+                            <img src="/img/mastercard3.png"/>
+                          </div>
+                          <div>
+                            <Checkbox
+                              name="payment-control"
+                              label="Oxudum, qəbul edirəm."
+                              input={state.orderControl}
+                              checkboxHandler={state.setOrderControl}
+                              error={state.orderError}
+                            />
+                          </div>
+                        </div>
+                        {state.orderControl ? (
+                          <a
+                            className="pink_more form-submit"
+                            onClick={state.postOrderForm}
+                          >
+                            Sifariş ver
+                          </a>
+                        ) : (
+                          <a
+                            className="pink_more pink_more_none form-submit"
+                            onClick={state.setOrderError}
+                          >
+                            Sifariş ver
+                          </a>
+                        )}
                       </form>
                     </div>
                   </div>

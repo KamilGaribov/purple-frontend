@@ -85,7 +85,7 @@ function Basket() {
                       <div className="cart_footer">
                           {state.basketTotal != null ?
                         <Link href="sebet/sifaris">
-                          <a className="pest_btn">Ünvana sifariş ver</a>
+                          <a className="pest_btn">Sifariş ver</a>
                         </Link>
                         : null}
                       </div>

@@ -4,6 +4,18 @@ const Context = React.createContext();
 
 class Provider extends Component {
   state = {
+    error: false,
+    setOrderError: () => {
+      this.setState({ orderError: true });
+    },
+    orderControl: false,
+    setOrderControl: () => {
+      if (this.state.orderControl) {
+        return this.setState({ orderControl: false });
+      }
+      this.setState({ orderControl: true });
+      this.setState({ orderError: false });
+    },
     perPage: 4,
     currentPage: 1,
     currentType: "hamısı",
@@ -138,7 +150,7 @@ class Provider extends Component {
       this.setState({ basketTotal: basketTotal });
     },
     deleteBasket: (e, item) => {
-      let basket = document.querySelector(".basket");
+      // let basket = document.querySelector(".basket");
       let tr = e.target.closest("tr");
       let item4 = tr.querySelector(".product_select").value;
       document.cookie =
@@ -539,45 +551,76 @@ class Provider extends Component {
       name: null,
       surname: null,
       city: null,
-      adress: null,
-      adress2: null,
+      address: null,
+      address2: null,
       email: null,
-      number: null,
       note: null,
+      amount: null
     },
     query: "?",
     postOrderForm: () => {
-      console.log("post: ");
-      var xml = `<?xml version="1.0" encoding="UTF-8"?>
-        <TKKPG>
-        <Request>
-           <Operation>CreateOrder</Operation>
-           <Language>RU</Language>
-           <Order>
-             <OrderType>Purchase</OrderType>
-             <Merchant>E1000010</Merchant>
-             <Amount>123456</Amount>
-             <Currency>944</Currency>
-             <Description>xxxxxxxx</Description>
-             <ApproveURL>/testshopPageReturn.jsp</ApproveURL>
-             <CancelURL>/testshopPageReturn.jsp</CancelURL>
-             <DeclineURL>/testshopPageReturn.jsp</DeclineURL>
-           </Order>
-        </Request>
-        </TKKPG>`;
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var cookies = decodedCookie.split("; ");
+      var amount = 0
+      for (let i = 0; i < cookies.length; i++) {
+        amount += parseFloat(cookies[i].split(', ')[5]);
+      }
+      if(isNaN(amount)){
+        return alert("Səbət boşdur")
+      }
+      if (this.state.input.name == null || this.state.input.name == "") {
+        return document
+          .querySelector(".billing_details_area input[name=name]")
+          .parentElement.classList.add("input-div-error");
+      }
+      if (this.state.input.surname == null || this.state.input.surname == "") {
+        return document
+          .querySelector(".billing_details_area input[name=surname]")
+          .parentElement.classList.add("input-div-error");
+      }
+      if (this.state.input.address == null || this.state.input.address == "") {
+        return document
+          .querySelector(".billing_details_area input[name=address]")
+          .parentElement.classList.add("input-div-error");
+      }
+      if (this.state.input.email == null || this.state.input.email == "") {
+        return document
+          .querySelector(".billing_details_area input[name=email]")
+          .parentElement.classList.add("input-div-error");
+      }
+      // return console.log("ppost_________: ", this.state.input);
+      this.setState({ orderControl: false });
+      console.log("stringfy: ", JSON.stringify({data: this.state.input}))
       let form = {
-        body: xml,
+        body: JSON.stringify({data: this.state.input, amount: amount}),
         method: "POST",
-        headers: {'Content-Type': 'application/xml'},
-        // headers: {"Content-Type": "application/json",},
+        headers: { "Content-Type": "application/json" },
+        // method: "GET",
+        // headers: {'Content-Type': 'application/xml'},
       };
-      // let url = "http://192.168.31.51:8000/test/";
-      // let url = "https://e-commerce.kapitalbank.az/index.jsp?"
-      let url = "https://e-commerce.kapitalbank.az:5443/Exec"
+      let url = "http://192.168.31.51:8000/test/";
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
           console.log("response_: ", response);
+          if (response.Status == "00") {
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookies = decodedCookie.split("; ");
+            for (let i = 0; i < cookies.length; i++) {
+              if (cookies[i].split("=")[1] == "added to shop cart") {
+                console.log("it is");
+                document.cookie =
+                  cookies[i].split("=")[0] +
+                  "=" +
+                  "added to shop cart" +
+                  ";" +
+                  "expires=Thu, 01 Jan 1970 00:00:01 GMT" +
+                  ";path=/";
+              }
+            }
+            return window.location = response.url;
+          }
+          alert("Biraz sonra cəhd edin", response.Status)
         })
         .catch((error) => {
           console.log("error: ", error);
@@ -585,8 +628,15 @@ class Provider extends Component {
     },
     inputHandler: (e) => {
       const { name, value } = e.target;
-      console.log("name: ", name);
-      console.log("value: ", value);
+      if (name != "note") {
+        document
+          .querySelector(`.billing_details_area input[name=${name}`)
+          .parentElement.classList.remove("input-div-error");
+      } else {
+        document
+          .querySelector(`.billing_details_area textarea`)
+          .parentElement.classList.remove("input-div-error");
+      }
       let formInput = { ...this.state.input };
       switch (name) {
         case "name":
@@ -699,16 +749,17 @@ class Provider extends Component {
           }
           formInput.city = value;
           break;
-        case "adress":
+        case "address":
           if (value) {
             if (
-              this.state.query.indexOf(`${name}=${this.state.input.adress}&`) !=
-              -1
+              this.state.query.indexOf(
+                `${name}=${this.state.input.address}&`
+              ) != -1
             ) {
               this.setState({
                 query:
                   this.state.query.replace(
-                    `${name}=${this.state.input.adress}&`,
+                    `${name}=${this.state.input.address}&`,
                     ""
                   ) +
                   `${name}=` +
@@ -722,30 +773,31 @@ class Provider extends Component {
             }
           } else {
             if (
-              this.state.query.indexOf(`${name}=${this.state.input.adress}&`) !=
-              -1
+              this.state.query.indexOf(
+                `${name}=${this.state.input.address}&`
+              ) != -1
             ) {
               this.setState({
                 query: this.state.query.replace(
-                  `${name}=${this.state.input.adress}&`,
+                  `${name}=${this.state.input.address}&`,
                   ""
                 ),
               });
             }
           }
-          formInput.adress = value;
+          formInput.address = value;
           break;
-        case "adress2":
+        case "address2":
           if (value) {
             if (
               this.state.query.indexOf(
-                `${name}=${this.state.input.adress2}&`
+                `${name}=${this.state.input.address2}&`
               ) != -1
             ) {
               this.setState({
                 query:
                   this.state.query.replace(
-                    `${name}=${this.state.input.adress2}&`,
+                    `${name}=${this.state.input.address2}&`,
                     ""
                   ) +
                   `${name}=` +
@@ -760,18 +812,18 @@ class Provider extends Component {
           } else {
             if (
               this.state.query.indexOf(
-                `${name}=${this.state.input.adress2}&`
+                `${name}=${this.state.input.address2}&`
               ) != -1
             ) {
               this.setState({
                 query: this.state.query.replace(
-                  `${name}=${this.state.input.adress2}&`,
+                  `${name}=${this.state.input.address2}&`,
                   ""
                 ),
               });
             }
           }
-          formInput.adress2 = value;
+          formInput.address2 = value;
           break;
         case "email":
           if (value) {
