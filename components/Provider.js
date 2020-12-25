@@ -6,6 +6,7 @@ class Provider extends Component {
   state = {
     error: false,
     setOrderError: () => {
+      console.log("new github")
       this.setState({ orderError: true });
     },
     orderControl: false,
@@ -548,12 +549,12 @@ class Provider extends Component {
     },
 
     input: {
-      name: null,
-      surname: null,
-      city: null,
-      address: null,
+      name: "K",
+      surname: "G",
+      city: "Baki",
+      address: "Address",
       address2: null,
-      email: null,
+      email: "kamil129@inbox.ru",
       note: null,
       amount: null
     },
@@ -562,9 +563,15 @@ class Provider extends Component {
       var decodedCookie = decodeURIComponent(document.cookie);
       var cookies = decodedCookie.split("; ");
       var amount = 0
+      let basket = {}
       for (let i = 0; i < cookies.length; i++) {
-        amount += parseFloat(cookies[i].split(', ')[5]);
+        if(cookies[i].split('=')[1] == 'added to shop cart'){
+          amount += parseFloat(cookies[i].split(', ')[5]);
+          let value = cookies[i].split(', ')[4]
+          basket[cookies[i].split(', ')[6].split('=')[0] + ":" + cookies[i].split(', ')[0]] = value
+        }
       }
+      // return console.log(basket)
       if(isNaN(amount)){
         return alert("Səbət boşdur")
       }
@@ -592,14 +599,14 @@ class Provider extends Component {
       this.setState({ orderControl: false });
       console.log("stringfy: ", JSON.stringify({data: this.state.input}))
       let form = {
-        body: JSON.stringify({data: this.state.input, amount: amount}),
+        body: JSON.stringify({data: this.state.input, amount: amount, basket: basket}),
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // method: "GET",
         // headers: {'Content-Type': 'application/xml'},
       };
-      // let url = "http://192.168.31.51:8000/test/";
-      let url = "http://api.purplecakeboutique.az/test/"
+      let url = "http://192.168.31.51:8000/test/";
+      // let url = "http://api.purplecakeboutique.az/test/"
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {

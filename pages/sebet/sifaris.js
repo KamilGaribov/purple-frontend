@@ -191,7 +191,7 @@ function Order() {
                           {state.basketItems ? (
                             state.basketItems.map((item, i) => {
                               return (
-                                <h5>
+                                <h5 key={i}>
                                   {item[2]} <span>{item[5]}</span>
                                 </h5>
                               );
