@@ -605,8 +605,8 @@ class Provider extends Component {
         // method: "GET",
         // headers: {'Content-Type': 'application/xml'},
       };
-      let url = "http://192.168.31.51:8000/test/";
-      // let url = "http://api.purplecakeboutique.az/test/"
+      // let url = "http://192.168.31.51:8000/test/";
+      let url = "http://api.purplecakeboutique.az/test/"
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
