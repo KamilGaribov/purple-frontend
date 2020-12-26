@@ -549,12 +549,12 @@ class Provider extends Component {
     },
 
     input: {
-      name: "K",
-      surname: "G",
+      name: null,
+      surname: null,
       city: "Baki",
-      address: "Address",
+      address: null,
       address2: null,
-      email: "kamil129@inbox.ru",
+      email: null,
       note: null,
       amount: null
     },
@@ -597,7 +597,7 @@ class Provider extends Component {
       }
       // return console.log("ppost_________: ", this.state.input);
       this.setState({ orderControl: false });
-      console.log("stringfy: ", JSON.stringify({data: this.state.input}))
+      // console.log("stringfy: ", JSON.stringify({data: this.state.input}))
       let form = {
         body: JSON.stringify({data: this.state.input, amount: amount, basket: basket}),
         method: "POST",
