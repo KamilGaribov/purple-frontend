@@ -3,7 +3,7 @@ services:
   frontend:
     container_name: nextjs
     build: .
-    command: npm run start
+    command: npm run build
     volumes:
       - .:/usr/src
     ports:
