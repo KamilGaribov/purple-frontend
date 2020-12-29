@@ -549,14 +549,14 @@ class Provider extends Component {
     },
 
     input: {
-      name: null,
-      surname: null,
+      name: "K",
+      surname: "G",
       city: "Baki",
-      address: null,
+      address: "A",
       address2: null,
-      email: null,
+      email: "E",
       note: null,
-      amount: null
+      amount: 1
     },
     query: "?",
     postOrderForm: () => {
