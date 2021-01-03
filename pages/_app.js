@@ -42,6 +42,7 @@ class MyApp extends App {
           <title>Purple Cake Boutique</title>
           <link rel="icon" href="/favicon.ico" />
           <meta
+            name="description"
             property="og:title"
             content='"The Purple Cake Boutique" çox ləzzətli və özəl sənət əsəri olan tortlar təqdim edir...'
             key="title"
