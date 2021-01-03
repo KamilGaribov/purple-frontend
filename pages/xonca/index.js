@@ -5,10 +5,9 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
 import Card from "../../components/card";
-import {apiUrl, } from "../../components/variables";
+import { apiUrl, perPage } from "../../components/variables";
 
 function CakeList({ posts }) {
-  var perPage = 2;
   var pages = [];
   for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
     pages.push(i);
@@ -289,12 +288,11 @@ function CakeList({ posts }) {
   );
 }
 
-
 // const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/"
+const vitrinApi = "http://web:8000/cake/";
 
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}xonca/`)
+  const res = await fetch(`${apiUrl}xonca/`);
   const posts = await res.json();
   return {
     props: {

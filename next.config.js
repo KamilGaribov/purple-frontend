@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ['192.168.31.51', 'api.purplecakeboutique.az'],
+  },
   trailingSlash: true,
   exportPathMap: async function (
     defaultPathMap,

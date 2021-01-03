@@ -1,9 +1,20 @@
 import Link from "next/link";
+import Image from 'next/image';
+
+const originalError = console.error;
+
+console.error = (...args) => {
+  if (/Warning.*Function components cannot be given refs/.test(args[0])) {
+    return;
+  }
+  originalError.call(console, ...args);
+};
+
 
 function Card(props) {
   const { item, addCart, pageType } = props;
   if (item.image) {
-    var src = "/" + item.image;
+    var src = item.image;
   } else {
     var src = "/img/cake-feature/c-feature-9.jpg";
   }
@@ -12,7 +23,7 @@ function Card(props) {
       <div className="cake_feature_item">
         <div className="cake_img">
           <Link href={`/${pageType}/[id]`} as={`/${pageType}/${item.id}`}>
-            <img src={src} alt="" />
+          <Image src={src} alt={item.name} width={500} height={500}/>
           </Link>
         </div>
         <div className="cake_text">

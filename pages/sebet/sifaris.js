@@ -143,7 +143,7 @@ function Order() {
                         </div>
                         <div className="payment-control form-group col-md-12">
                           <ul>
-                            <li>Məhsul Bakı şəhəri daxilində 1 saat ərzində ünvana çatdırılır</li>
+                            <li>Hazır məhsul Bakı şəhəri daxilində 1 saat ərzində ünvana çatdırılır</li>
                             <li>Çatdırılma pulsuzdur</li>
                             <li>Məhsul geri qaytarılmır</li>
                             <li>Ödəniş kart vasitəsi ilə qəbul olunur</li>

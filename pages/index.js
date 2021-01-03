@@ -148,8 +148,7 @@ export default function Home({posts, types}) {
                           <h4>Ünvana çatdırılma</h4>
                         </a>
                         <p>
-                          Lorem Ipsum is simply my text of the printing and
-                          Ipsum is simply text of the Ipsum is simply.
+                          Sifariş edilən hazır məhsul 1 saat ərzində ünvana çatdırılır.
                         </p>
                       </div>
                     </div>

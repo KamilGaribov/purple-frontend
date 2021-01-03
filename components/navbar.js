@@ -32,7 +32,10 @@ function Navbar(props) {
               <i className="fa fa-phone" aria-hidden="true"></i>
               <span>+994 51 746 8384</span>
             </a>
-            <a className="call-mob" href="https://api.whatsapp.com/send?phone=+994507468384">
+            <a
+              className="call-mob"
+              href="https://api.whatsapp.com/send?phone=+994507468384"
+            >
               <i className="fa fa-whatsapp" aria-hidden="true"></i>
               <span>watsapp</span>
             </a>
@@ -166,15 +169,17 @@ function Navbar(props) {
               </ul>
               <div className="navbar-logo-web">
                 <Link href="/">
-                  <img
-                    src="/img/logo4.png"
-                    onClick={changeUrl}
-                    className={
-                      navActive == "Home"
-                        ? "navbar-logo-img active"
-                        : "navbar-logo-img"
-                    }
-                  />
+                  <a>
+                    <img
+                      src="/img/logo6.png"
+                      onClick={changeUrl}
+                      className={
+                        navActive == "Home"
+                          ? "navbar-logo-img active"
+                          : "navbar-logo-img"
+                      }
+                    />
+                  </a>
                 </Link>
               </div>
             </div>
@@ -183,7 +188,7 @@ function Navbar(props) {
         <div className="navbar-logo-mob">
           <Link href="/">
             <img
-              src="/img/logo4.png"
+              src="/img/logo6.png"
               onClick={changeUrl}
               className={
                 navActive == "Home"
@@ -208,51 +213,49 @@ function Navbar(props) {
               </tr>
             </thead>
             <tbody>
-              {basketItems != null ? (
-                basketItems.map((item, i) => {
-                  return (
-                    <tr key={i}>
-                      <td>
-                        <Link
-                          href={`/${item[6]}/[id]`}
-                          as={`/${item[6]}/${item[0]}`}
-                        >
-                          <img src={item[1]} alt="" />
-                        </Link>
-                      </td>
-                      <td>{item[2]}</td>
-                      <td className="basket-price">{item[3]}</td>
-                      <td>
-                        <select
-                          className="product_select"
-                          onChange={(e) => changeBasket(e, item)}
-                          value={item[4]}
-                        >
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                        </select>
-                      </td>
-                      <td className="basket-total">{item[5]}</td>
-                      <td>
-                        <i
-                          className="fa fa-close"
-                          onClick={(e) => deleteBasket(e, item)}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })
-                ) : (
-                 null
-                )}
+              {basketItems != null
+                ? basketItems.map((item, i) => {
+                    return (
+                      <tr key={i}>
+                        <td>
+                          <Link
+                            href={`/${item[6]}/[id]`}
+                            as={`/${item[6]}/${item[0]}`}
+                          >
+                            <img src={item[1]} alt="" />
+                          </Link>
+                        </td>
+                        <td>{item[2]}</td>
+                        <td className="basket-price">{item[3]}</td>
+                        <td>
+                          <select
+                            className="product_select"
+                            onChange={(e) => changeBasket(e, item)}
+                            value={item[4]}
+                          >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td className="basket-total">{item[5]}</td>
+                        <td>
+                          <i
+                            className="fa fa-close"
+                            onClick={(e) => deleteBasket(e, item)}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
             </tbody>
           </table>
-          {basketItems == null ?
-          <span className="basket-null">Səbət boşdur</span>
-        : null}
+          {basketItems == null ? (
+            <span className="basket-null">Səbət boşdur</span>
+          ) : null}
         </div>
         <div className="basket-footer">
           <Link href="/sebet">

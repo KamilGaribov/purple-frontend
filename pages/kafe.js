@@ -41,8 +41,8 @@ export default function Cafe({ posts }) {
                       >
                         <img
                           className="d-block w-100"
-                          src={"/" + item.image}
-                          alt="First slide"
+                          src={item.image}
+                          alt="Purple şirniyyat butiki"
                         />
                       </div>
                     );

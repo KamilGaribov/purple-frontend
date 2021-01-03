@@ -5,8 +5,7 @@ import { Consumer } from "../components/Provider";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Search from "../components/search";
-import {Marker} from "../components/variables"
-
+import { Marker } from "../components/variables";
 
 function About() {
   return (
@@ -21,9 +20,19 @@ function About() {
             <section className="our_bakery_area p_100">
               <div className="container">
                 <div className="our_bakery_text">
-                  <h2>Our Bakery Approach </h2>
+                  <h2>Purple Cake Boutique</h2>
                   <h6>
-                  "Siz xəyal qurun, biz onu gözəl şəkildə gerçəkləşdirək" fikrinə əsaslanaraq son illərdə insanlarda böyük tələbat doğuran bu xidmət sahəsi üzrə 2009-cu ildən etibarən Bakı şəhərində fəaliyyət göstəririk. Məhsullar hər kəsə özəl hazırlanır. Tamamən fərdi zövqlərə cavab vermək niyyətimiz və böyük təcrübəmiz bizə sənət əsəri olan tortları hazırlamağa imkan verir. Təqdim etdiyimiz hər tortun müştərilərimiz tərəfindən də əsl incəsənət nümunəsi kimi qəbul olunması  bizim üçün xüsusilə xoşdur.
+                    "Siz xəyal qurun, biz onu gözəl şəkildə gerçəkləşdirək"
+                    fikrinə əsaslanaraq son illərdə insanlarda böyük tələbat
+                    doğuran bu xidmət sahəsi üzrə 2009-cu ildən etibarən Bakı
+                    şəhərində fəaliyyət göstəririk. Məhsullar hər kəsə özəl
+                    hazırlanır. Tamamən fərdi zövqlərə cavab vermək niyyətimiz
+                    və böyük təcrübəmiz bizə sənət əsəri olan tortları
+                    hazırlamağa imkan verir. Mütəxəssislərlə, peşəkar ustalarla
+                    ve heykəltaraşlarla çalışırıq. Təqdim etdiyimiz hər tortun
+                    müştərilərimiz tərəfindən də əsl incəsənət nümunəsi kimi
+                    qəbul olunması bizim üçün xüsusilə xoşdur. Xüsusi, evsayağı,
+                    fərqli çeşidlərlə şirniyyat və qurabiyə satışı da həyata keçirilir.
                   </h6>
                 </div>
                 <div className="row our_bakery_image">
@@ -51,7 +60,7 @@ function About() {
                 </div>
               </div>
             </section>
-            <section className="our_mission_area p_100">
+            {/* <section className="our_mission_area p_100">
               <div className="container">
                 <div className="row our_mission_inner">
                   <div className="col-lg-3">
@@ -62,26 +71,16 @@ function About() {
                   <div className="col-lg-9">
                     <div className="mission_inner_text">
                       <h6>
-                        Sed ut perspiciatis unde omnis iste natus error sit
-                        voluptatem accusantium doloremque laudan-tium, totam rem
-                        aperiam, eaque ipsa quae ab illo inventore veritatis et
-                        quasi architecto beatae vitae dicta sunt explicabo.
+                        Hər cür formada və qeyri-standart tortlar hazırlayırıq.
+                        Mütəxəssislərlə,peşəkar ustalarla ve heykəltaraşlarla
+                        çalışırıq. Biri birindən dadlı tortlar və şirniyyatların
+                        satışı gündəlik vitrindən satırıq.Hər bir tortumuz
+                        unikaldır, xüsusi cazibədarlığı və bənzərsiz dizaynı
+                        var. Hər bir bayram günlərində xususi və hər zövgə uyğun
+                        xonçalar hazırlanır.Bu gün kafe şəbəkəmizdə hər gün təzə
+                        şirniyyat tədarik edirik. Xüsusi, ev sayağı, fərqli
+                        çeşitlərlə qurabiyə satışı həyata keçirilir.
                       </h6>
-                      <p>
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                        aut odit aut fugit, sed quia consequuntur magni dolores
-                        eos qui ratione voluptatem sequi nesciunt. Neque porro
-                        quisquam est, qui dolorem ipsum quia dolor sit amet,
-                        consectetur, adipisci velit, sed quia non numquam eius
-                        modi tempora incidunt ut labore et dolore magnam aliquam
-                        quaerat voluptatem. Ut enim ad minima veniam, quis
-                        nostrum exercitationem ullam corporis suscipit
-                        laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                        Quis autem vel eum iure reprehenderit qui in ea
-                        voluptate velit esse quam nihil molestiae consequatur,
-                        vel illum qui dolorem eum fugiat quo voluptas nulla
-                        pariatu
-                      </p>
                       <ul className="nav">
                         <li>
                           <a href="#">Custom cakes</a>
@@ -100,14 +99,13 @@ function About() {
                   </div>
                 </div>
               </div>
-            </section>
+            </section> */}
             <section className="contact_form_area p_100">
               <div className="container">
                 <div className="main_title">
                   <h2>Bizə yaz</h2>
                   <h5>
-                    Do you have anything in your mind to let us know? Kindly
-                    don't delay to connect to us by means of our contact form.
+                    Şikayət və təkliflərinizi bizə bildirin..
                   </h5>
                 </div>
                 <div className="row">
@@ -127,7 +125,9 @@ function About() {
                           placeholder="Adınız *"
                           onBlur={(e) => state.contactHandler(e)}
                         />
-                        <div className="input-error">bu xana doldurulmalıdır</div>
+                        <div className="input-error">
+                          bu xana doldurulmalıdır
+                        </div>
                       </div>
                       <div className="form-group col-md-6">
                         <input
@@ -138,7 +138,9 @@ function About() {
                           placeholder="Email *"
                           onBlur={(e) => state.contactHandler(e)}
                         />
-                        <div className="input-error">bu xana doldurulmalıdır</div>
+                        <div className="input-error">
+                          bu xana doldurulmalıdır
+                        </div>
                       </div>
                       <div className="form-group col-md-6">
                         <input
@@ -159,7 +161,9 @@ function About() {
                           placeholder="Mövzu *"
                           onBlur={(e) => state.contactHandler(e)}
                         />
-                        <div className="input-error">bu xana doldurulmalıdır</div>
+                        <div className="input-error">
+                          bu xana doldurulmalıdır
+                        </div>
                       </div>
                       <div className="form-group col-md-12">
                         <textarea
@@ -170,9 +174,13 @@ function About() {
                           placeholder="Məktub *"
                           onBlur={(e) => state.contactHandler(e)}
                         ></textarea>
-                        <div className="input-error">bu xana doldurulmalıdır</div>
+                        <div className="input-error">
+                          bu xana doldurulmalıdır
+                        </div>
                       </div>
-                      <div className="form-group col-md-12">{state.contactSuccess? state.contactSuccess : null}</div>
+                      <div className="form-group col-md-12">
+                        {state.contactSuccess ? state.contactSuccess : null}
+                      </div>
                       <div className="form-group col-md-12">
                         <button
                           type="button"
@@ -229,10 +237,7 @@ function About() {
                 }}
                 defaultZoom={16}
               >
-                <Marker
-                  lat={40.397456057446895}
-                  lng={49.86928900875125}
-                />
+                <Marker lat={40.397456057446895} lng={49.86928900875125} />
               </GoogleMapReact>
             </section>
             <Footer />

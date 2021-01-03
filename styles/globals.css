@@ -12492,6 +12492,7 @@ i:before {
   padding: 10px 0 10px 0;
   height: auto;
   width: 100%;
+  object-fit: cover;
 }
 
 .basket-container table tbody tr td .product_select {
@@ -14226,10 +14227,11 @@ i:before {
   transition: all 300ms ease;
   width: 100%;
   height: 100%;
-  max-height: 290px;
+  object-fit: cover;
+  /* max-height: 290px;
   min-height: 290px;
   max-width: 290px;
-  min-height: 290px;
+  min-width: 290px; */
 }
 
 .cake_feature_item .cake_img:before {
@@ -17379,6 +17381,7 @@ section.cafe .slide {
 }
 section.cafe .carousel-item {
   object-fit: contain;
+  object-fit: cover;
 }
 section.cafe .carousel-item img {
   width: 900px;

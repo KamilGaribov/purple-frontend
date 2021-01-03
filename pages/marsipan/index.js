@@ -5,10 +5,10 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
 import Card from "../../components/card";
-import {apiUrl, } from "../../components/variables";
+import { apiUrl, perPage } from '../../components/variables';
+
 
 function CakeList({ posts }) {
-  var perPage = 2;
   var pages = [];
   for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
     pages.push(i);

@@ -12,6 +12,11 @@ function Post({ post }) {
   const back = () => {
     router.back()
   }
+  const goOrder = (func) => {
+    if(func){
+      router.push("/sebet")
+    }
+  }
   return (
     <div>
       <Head>
@@ -53,13 +58,15 @@ function Post({ post }) {
                       <a
                         className="pink_more"
                         onClick={() => {
-                          state.addCart(post, "marsipantortlar");
+                          state.addCart(post, "marsipan");
                         }}
                       >
                         səbətə əlavə et
                       </a>
                       <Link href="/sebet">
-                        <a className="pink_more order_btn">sifariş ver</a>
+                        <a className="pink_more order_btn" onClick={() => {
+                          goOrder(state.addCart(post, "marsipan", true))
+                        }}>sifariş ver</a>
                       </Link>
                     </div>
                   </div>

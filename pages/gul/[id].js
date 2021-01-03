@@ -5,13 +5,18 @@ import { Consumer } from "../../components/Provider";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
-import {apiUrl, } from "../../components/variables";
+import { apiUrl } from "../../components/variables";
 
 function Post({ post }) {
-  const router = useRouter()
+  const router = useRouter();
   const back = () => {
-    router.back()
-  }
+    router.back();
+  };
+  const goOrder = (func) => {
+    if (func) {
+      router.push("/sebet");
+    }
+  };
   return (
     <div>
       <Head>
@@ -26,11 +31,7 @@ function Post({ post }) {
                 <div className="row product_d_price">
                   <div className="col-lg-6">
                     <div className="product_img">
-                      <img
-                        className="img-fluid"
-                        src={post.image}
-                        alt=""
-                      />
+                      <img className="img-fluid" src={post.image} alt="" />
                     </div>
                   </div>
                   <div className="col-lg-6">
@@ -59,13 +60,22 @@ function Post({ post }) {
                         səbətə əlavə et
                       </a>
                       <Link href="/sebet">
-                        <a className="pink_more order_btn">sifariş ver</a>
+                        <a
+                          className="pink_more order_btn"
+                          onClick={() => {
+                            goOrder(state.addCart(post, "flower", true));
+                          }}
+                        >
+                          sifariş ver
+                        </a>
                       </Link>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="product_details_back"><i className="fa fa-chevron-left" onClick={back}/></div>
+              <div className="product_details_back">
+                <i className="fa fa-chevron-left" onClick={back} />
+              </div>
             </section>
             <section className="similar_product_area p_100">
               <div className="container">
@@ -73,7 +83,7 @@ function Post({ post }) {
                   <h2>Oxşar məhsullar</h2>
                 </div>
                 <div className="row similar_product_inner">
-                {post.similar1 ? (
+                  {post.similar1 ? (
                     <Card
                       item={post.similar1}
                       pageType={"flower"}
@@ -119,10 +129,10 @@ function Post({ post }) {
 // const res = await fetch(`http://web:8000/api/cake/${params.id}/`);
 // const res = await fetch(`https://5f8ede96693e730016d7a9be.mockapi.io/cake/all/${params.id}`);
 // const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/"
+const vitrinApi = "http://web:8000/cake/";
 
 export async function getStaticPaths() {
-  const res = await fetch(`${apiUrl}flower/`)
+  const res = await fetch(`${apiUrl}flower/`);
   const posts = await res.json();
   const paths = posts.map((post) => {
     return { params: { id: post.id.toString() } };
@@ -131,7 +141,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${apiUrl}flower/${params.id}/`)
+  const res = await fetch(`${apiUrl}flower/${params.id}/`);
   const post = await res.json();
 
   return { props: { post } };

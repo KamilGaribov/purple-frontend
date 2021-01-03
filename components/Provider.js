@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { apiUrl, perPage } from './variables';
 
 const Context = React.createContext();
 
@@ -17,7 +18,7 @@ class Provider extends Component {
       this.setState({ orderControl: true });
       this.setState({ orderError: false });
     },
-    perPage: 4,
+    perPage: perPage,
     currentPage: 1,
     currentType: "hamısı",
     sortedData: null,
@@ -26,17 +27,18 @@ class Provider extends Component {
     sortData: (data, e) => {
       let type = e.target.innerHTML.toLowerCase();
       this.setState({ currentType: type });
-      let perPage = 4;
+      // let perPage = perPage;
       let pagesSorted = [];
       if (type == "hamısı") {
         for (let i = 1; i <= Math.ceil(data.length / perPage); i++) {
           pagesSorted.push(i);
         }
-        this.setState({ sortedData: data });
+        // this.setState({ sortedData: data });
+        this.setState({sortedData: null})
       } else {
         let sortedData = [];
         for (let i = 0; i < data.length; i++) {
-          if (data[i].category.name == type) {
+          if (data[i].category && data[i].category.name == type) {
             sortedData.push(data[i]);
           }
         }
@@ -191,7 +193,7 @@ class Provider extends Component {
       this.setState({ basketTotal: basketTotal });
       // }
     },
-    addCart: (item, type) => {
+    addCart: (item, type, order) => {
       let basket = document.querySelector(".basket");
       var decodedCookie = decodeURIComponent(document.cookie);
       var cookies = decodedCookie.split("; ");
@@ -208,7 +210,7 @@ class Provider extends Component {
         d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
         var expires = "expires=" + d.toUTCString();
         if (item.image) {
-          var src = "/" + item.image;
+          var src = item.image;
         } else {
           var src = "/img/cake-feature/c-feature-9.jpg";
         }
@@ -254,6 +256,9 @@ class Provider extends Component {
       this.setState({ basketCount: basketItems.length });
       this.setState({ basketItems: basketItems });
       this.setState({ basketTotal: basketTotal });
+      if(order){
+        return true
+      }
       basket.classList.add("display-block");
     },
     getBasketItems: () => {
@@ -334,7 +339,8 @@ class Provider extends Component {
           .parentElement.classList.add("input-div-error");
       }
       // let url = `http://192.168.31.51:8000/contact/`;
-      let url = `http://api.purplecakeboutique.az/contact/`;
+      // let url = `http://api.purplecakeboutique.az/contact/`;
+      let url = `${apiUrl}contact/`
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
@@ -606,7 +612,8 @@ class Provider extends Component {
         // headers: {'Content-Type': 'application/xml'},
       };
       // let url = "http://192.168.31.51:8000/test/";
-      let url = "http://api.purplecakeboutique.az/test/"
+      // let url = "http://api.purplecakeboutique.az/test/"
+      let url = `${apiUrl}test/`
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {

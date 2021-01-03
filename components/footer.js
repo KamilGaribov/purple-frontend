@@ -9,10 +9,10 @@ function Footer() {
             <div className="col-lg-3 col-6">
               <aside className="f_widget f_about_widget">
                 <img src="/img/purple_logo123.png" alt="" />
-                <p>
+                {/* <p>
                   At vero eos et accusamus et iusto odio dignissimos ducimus qui
                   bland itiis praesentium voluptatum deleniti atque corrupti.
-                </p>
+                </p> */}
                 <ul className="nav">
                   <li>
                     <a
