@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const originalError = console.error;
 
@@ -22,7 +22,7 @@ function Card(props) {
       <div className="cake_feature_item">
         <div className="cake_img">
           <Link href={`/${pageType}/[id]`} as={`/${pageType}/${item.id}`}>
-            <Image src={src} alt={item.name} width={500} height={500}/>
+            <img src={src} alt={item.name}/>
           </Link>
         </div>
         <div className="cake_text">
