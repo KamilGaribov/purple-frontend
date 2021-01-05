@@ -80,7 +80,6 @@ function Post({ post } = {}) {
                       >
                         səbətə əlavə et
                       </a>
-                      {/* <Link href="/sebet"> */}
                       <a
                         className="pink_more order_btn"
                         onClick={() => {
@@ -89,7 +88,6 @@ function Post({ post } = {}) {
                       >
                         sifariş ver
                       </a>
-                      {/* </Link> */}
                     </div>
                   </div>
                 </div>
@@ -144,13 +142,6 @@ function Post({ post } = {}) {
   );
 }
 
-// const res = await fetch(`http://127.0.0.1:8000/api/cake/${params.id}`);
-// const res = await fetch(`http://34.69.209.226:8000/api/cake/${params.id}/`);
-// const res = await fetch(`http://192.168.31.51:8000/api/cake/${params.id}/`);
-// const res = await fetch(`http://web:8000/api/cake/${params.id}/`);
-// const res = await fetch(`https://5f8ede96693e730016d7a9be.mockapi.io/cake/all/${params.id}`);
-// const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/";
 
 export async function getStaticPaths() {
   let paths = [];
@@ -184,21 +175,3 @@ export async function getStaticProps({ params }) {
 }
 
 export default Post;
-
-// const put = () => {
-//   let form = {
-//     method: "PATCH",
-//     body: JSON.stringify({
-//       city: "Masalli",
-//     }),
-//     headers: {
-//       "Content-type": "application/json; charset=UTF-8",
-//     },
-//   };
-//   console.log("___form", form);
-//   let url = `http://192.168.31.51:8000/api/stadion/${post.id}/`;
-//   fetch(url, form)
-//     .then((res) => res.json())
-//     .then((response) => console.log("Success:", response))
-//     .catch((error) => console.error("Error:", error));
-// };

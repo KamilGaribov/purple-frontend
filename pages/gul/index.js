@@ -8,15 +8,17 @@ import Card from "../../components/card";
 import { apiUrl, perPage } from "../../components/variables";
 
 function CakeList({ posts }) {
-  var pages = [];
-  for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
+  let pages = [];
+  const postsCount = posts.length;
+  for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
     pages.push(i);
   }
-  var pagesCount = pages.length;
+  let pagesCount = pages.length;
+
   return (
     <div>
       <Head>
-        <title>Gül</title>
+        <title>Purple Güllər</title>
       </Head>
       <Consumer>
         {({ state }) => (
@@ -38,7 +40,7 @@ function CakeList({ posts }) {
                                 <Card
                                   key={item.id}
                                   item={item}
-                                  pageType={"flower"}
+                                  pageType={"gul"}
                                   addCart={state.addCart}
                                 />
                               );
@@ -53,14 +55,15 @@ function CakeList({ posts }) {
                                 <Card
                                   key={item.id}
                                   item={item}
-                                  pageType={"flower"}
+                                  pageType={"gul"}
                                   addCart={state.addCart}
                                 />
                               );
                             })}
                     </div>
                     <div className="product_pagination">
-                      <div className="left_btn"></div>
+                      <div className="left_btn">
+                      </div>
                       <div className="middle_list">
                         <nav aria-label="Page navigation example">
                           <ul className="pagination">
@@ -106,7 +109,8 @@ function CakeList({ posts }) {
                           </ul>
                         </nav>
                       </div>
-                      <div className="right_btn"></div>
+                      <div className="right_btn">
+                      </div>
                     </div>
                   </div>
                   <div className="col-lg-3">
@@ -158,17 +162,21 @@ function CakeList({ posts }) {
   );
 }
 
-// const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/";
-
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}flower/`);
-  const posts = await res.json();
+  const props = { posts: [] };
+
+  try {
+    const res = await fetch(`${apiUrl}flower/`);
+    const posts = await res.json();
+
+    props.posts = posts;
+  } catch (error) {
+    console.log("error", error);
+  }
+
   return {
-    props: {
-      posts,
-    },
-    revalidate: 5,
+    props,
+    // revalidate: 1,
   };
 }
 

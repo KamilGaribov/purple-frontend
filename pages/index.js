@@ -8,7 +8,7 @@ import Search from "../components/search";
 import Card from "../components/card2";
 import { Marker, apiUrl } from "../components/variables";
 
-export default function Home({posts, types}) {
+export default function Home({ posts, types }) {
   return (
     <Consumer>
       {({ state }) => (
@@ -16,7 +16,7 @@ export default function Home({posts, types}) {
           <Navbar state={state} />
           <section className="main_slider_area">
             <div className="cover-text">
-              Siz xəyal qurun, biz onu <br/>
+              Siz xəyal qurun, biz onu <br />
               gözəl şəkildə gerçəkləşdirək.
             </div>
           </section>
@@ -58,8 +58,7 @@ export default function Home({posts, types}) {
                           <h4>Hər cür sifariş</h4>
                         </a>
                         <p>
-                          Lorem Ipsum is simply my text of the printing and
-                          Ipsum is simply text of the Ipsum is simply.
+                          İstənilən zövqə uyğun sifariş qəbul edirik.
                         </p>
                       </div>
                     </div>
@@ -76,8 +75,8 @@ export default function Home({posts, types}) {
                           <h4>Kurabiyələr</h4>
                         </a>
                         <p>
-                          Lorem Ipsum is simply my text of the printing and
-                          Ipsum is simply text of the Ipsum is simply.
+                          Xüsusi, evsayağı, fərqli çeşidlərlə qurabiyə satışı
+                          həyata keçirilir.
                         </p>
                       </div>
                     </div>
@@ -94,8 +93,8 @@ export default function Home({posts, types}) {
                           <h4>Tortlar</h4>
                         </a>
                         <p>
-                          Lorem Ipsum is simply my text of the printing and
-                          Ipsum is simply text of the Ipsum is simply.
+                          Hər cür formada və qeyri-standart tortlar
+                          hazırlayırıq.
                         </p>
                       </div>
                     </div>
@@ -112,8 +111,7 @@ export default function Home({posts, types}) {
                           <h4>Xonçalar</h4>
                         </a>
                         <p>
-                          Lorem Ipsum is simply my text of the printing and
-                          Ipsum is simply text of the Ipsum is simply.
+                          Hər bir bayrama və ya xüsusi günə özəl xonçalar hazırlanır.
                         </p>
                       </div>
                     </div>
@@ -127,11 +125,10 @@ export default function Home({posts, types}) {
                       </div>
                       <div className="media-body">
                         <a href="#">
-                          <h4>Gözəl kafemiz</h4>
+                          <h4>Kafemiz</h4>
                         </a>
                         <p>
-                          Lorem Ipsum is simply my text of the printing and
-                          Ipsum is simply text of the Ipsum is simply.
+                          Kafemizdə isti bir içki ilə şirniyyatlarımızı dada bilərsiniz.
                         </p>
                       </div>
                     </div>
@@ -148,7 +145,8 @@ export default function Home({posts, types}) {
                           <h4>Ünvana çatdırılma</h4>
                         </a>
                         <p>
-                          Sifariş edilən hazır məhsul 1 saat ərzində ünvana çatdırılır.
+                          Sifariş edilən hazır məhsul 1 saat ərzində ünvana
+                          çatdırılır.
                         </p>
                       </div>
                     </div>
@@ -184,23 +182,23 @@ export async function getStaticProps() {
   const posts = await res.json();
   const res2 = await fetch(`${apiUrl}homepageproductcount/`);
   const posts2 = await res2.json();
-  const types = []
-  for(let i=0; i<posts2[0].vitrin; i++){
-    types.push("vitrin")
+  const types = [];
+  for (let i = 0; i < posts2[0].vitrin; i++) {
+    types.push("vitrin");
   }
-  for(let i=0; i<posts2[0].marsipan; i++){
-    types.push("marsipan")
+  for (let i = 0; i < posts2[0].marsipan; i++) {
+    types.push("marsipan");
   }
-  for(let i=0; i<posts2[0].flower; i++){
-    types.push("flower")
+  for (let i = 0; i < posts2[0].flower; i++) {
+    types.push("flower");
   }
-  for(let i=0; i<posts2[0].xonca; i++){
-    types.push("xonca")
+  for (let i = 0; i < posts2[0].xonca; i++) {
+    types.push("xonca");
   }
   return {
     props: {
-      posts: posts.slice(0,8),
-      types
+      posts: posts.slice(0, 8),
+      types,
     },
     revalidate: 5,
   };

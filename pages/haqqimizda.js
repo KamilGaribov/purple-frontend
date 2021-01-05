@@ -11,7 +11,7 @@ function About() {
   return (
     <div>
       <Head>
-        <title>Purple - haqqımızda</title>
+        <title>Purple Haqqımızda</title>
       </Head>
       <Consumer>
         {({ state }) => (

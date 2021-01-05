@@ -18,7 +18,7 @@ function CakeList({ posts }) {
   return (
     <div>
       <Head>
-        <title>Vitrin</title>
+        <title>Purple Vitrin</title>
       </Head>
       <Consumer>
         {({ state }) => (
@@ -36,14 +36,12 @@ function CakeList({ posts }) {
                               state.currentPage * state.perPage
                             )
                             .map((item, i) => {
-                              // {state.data.map((item, i) => {
                               return (
                                 <Card
                                   key={item.id}
                                   item={item}
                                   pageType={"vitrin"}
                                   addCart={state.addCart}
-                                  // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
                               );
                             })
@@ -53,28 +51,18 @@ function CakeList({ posts }) {
                               state.currentPage * state.perPage
                             )
                             .map((item, i) => {
-                              // {state.data.map((item, i) => {
                               return (
                                 <Card
                                   key={item.id}
                                   item={item}
                                   pageType={"vitrin"}
                                   addCart={state.addCart}
-                                  // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
                               );
                             })}
                     </div>
                     <div className="product_pagination">
-                      <div className="left_btn">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            state.pageBack(pagesCount);
-                          }}
-                        >
-                          <i className="lnr lnr-arrow-left"></i>geri
-                        </a> */}
+                      <div className="left_btn">\
                       </div>
                       <div className="middle_list">
                         <nav aria-label="Page navigation example">
@@ -122,14 +110,6 @@ function CakeList({ posts }) {
                         </nav>
                       </div>
                       <div className="right_btn">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            state.pageForward(pagesCount);
-                          }}
-                        >
-                          növbəti<i className="lnr lnr-arrow-right"></i>
-                        </a> */}
                       </div>
                     </div>
                   </div>
@@ -259,18 +239,6 @@ function CakeList({ posts }) {
                           <li>
                             <a
                               className={
-                                state.currentType == "novruz" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Novruz
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
                                 state.currentType == "börək" ? "active" : null
                               }
                               onClick={(e) => {
@@ -334,7 +302,7 @@ export async function getStaticProps() {
 
   return {
     props,
-    revalidate: 5,
+    // revalidate: 1,
   };
 }
 

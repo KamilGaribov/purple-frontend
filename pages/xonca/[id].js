@@ -6,17 +6,23 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
 import { apiUrl } from "../../components/variables";
+import Card from "../../components/card2";
 
-function Post({ post }) {
+function Post({ post } = {}) {
   const router = useRouter();
   const back = () => {
     router.back();
   };
   const goOrder = (func) => {
-    if (func) {
-      router.push("/sebet");
+    if(func){
+      router.push("/sebet")
     }
-  };
+  }
+
+  if (!post) {
+    return null;
+  }
+
   return (
     <div>
       <Head>
@@ -31,22 +37,37 @@ function Post({ post }) {
                 <div className="row product_d_price">
                   <div className="col-lg-6">
                     <div className="product_img">
-                      <img className="img-fluid" src={post.image} alt="" />
+                      <img
+                        className="img-fluid"
+                        src={
+                          post.image
+                            ? post.image
+                            : "/img/cake-feature/c-feature-9.jpg"
+                        }
+                        alt=""
+                      />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="product_details_text">
                       <h4>{post.name}</h4>
                       <p>
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                        aut odit aut fugit, sed quia consequ untur magni dolores
-                        eos qui ratione voluptatem sequi nesciunt. Neque porro
-                        quisquam est,
+                        <b>Ingredientər:</b> {post.ingredient}
                       </p>
-                      <h5>
-                        Qiymət: <span>{post.price}</span>{" "}
-                        <img src="/img/azn.png" className="card-azn" />
-                      </h5>
+                      <p>
+                        <b>Çəki:</b> {post.weight} kq
+                      </p>
+                      {post.discount ? (
+                        <p>
+                          <b>Qiymət:</b>{" "}
+                          <span className="product_discount">{post.price}</span>{" "}
+                          {post.discount} azn
+                        </p>
+                      ) : (
+                        <p>
+                          <b>Qiymət:</b> {post.price} azn
+                        </p>
+                      )}
                       <div className="quantity_box">
                         <label htmlFor="quantity">Miqdar: </label>
                         <input type="text" placeholder="1" id="quantity" />
@@ -59,16 +80,14 @@ function Post({ post }) {
                       >
                         səbətə əlavə et
                       </a>
-                      <Link href="/sebet">
-                        <a
-                          className="pink_more order_btn"
-                          onClick={() => {
-                            goOrder(state.addCart(post, "xonca", true));
-                          }}
-                        >
-                          sifariş ver
-                        </a>
-                      </Link>
+                      <a
+                        className="pink_more order_btn"
+                        onClick={() => {
+                          goOrder(state.addCart(post, "xonca", true))
+                        }}
+                      >
+                        sifariş ver
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -123,46 +142,36 @@ function Post({ post }) {
   );
 }
 
-// const res = await fetch(`http://127.0.0.1:8000/api/cake/${params.id}`);
-// const res = await fetch(`http://34.69.209.226:8000/api/cake/${params.id}/`);
-// const res = await fetch(`http://192.168.31.51:8000/api/cake/${params.id}/`);
-// const res = await fetch(`http://web:8000/api/cake/${params.id}/`);
-// const res = await fetch(`https://5f8ede96693e730016d7a9be.mockapi.io/cake/all/${params.id}`);
-// const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/";
 
 export async function getStaticPaths() {
-  const res = await fetch(`${apiUrl}xonca/`);
-  const posts = await res.json();
-  const paths = posts.map((post) => {
-    return { params: { id: post.id.toString() } };
-  });
+  let paths = [];
+
+  try {
+    const res = await fetch(`${apiUrl}xonca/`);
+    const posts = await res.json();
+
+    paths = posts.map((post) => {
+      return { params: { id: post.id.toString() } };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${apiUrl}xonca/${params.id}/`);
-  const post = await res.json();
+  const props = { post: {} };
+  try {
+    const res = await fetch(`${apiUrl}xonca/${params.id}/`);
+    const post = await res.json();
 
-  return { props: { post } };
+    props.post = post;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return { props };
 }
 
 export default Post;
-
-// const put = () => {
-//   let form = {
-//     method: "PATCH",
-//     body: JSON.stringify({
-//       city: "Masalli",
-//     }),
-//     headers: {
-//       "Content-type": "application/json; charset=UTF-8",
-//     },
-//   };
-//   console.log("___form", form);
-//   let url = `http://192.168.31.51:8000/api/stadion/${post.id}/`;
-//   fetch(url, form)
-//     .then((res) => res.json())
-//     .then((response) => console.log("Success:", response))
-//     .catch((error) => console.error("Error:", error));
-// };

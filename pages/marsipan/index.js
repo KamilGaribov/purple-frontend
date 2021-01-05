@@ -5,19 +5,20 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
 import Card from "../../components/card";
-import { apiUrl, perPage } from '../../components/variables';
-
+import { apiUrl, perPage } from "../../components/variables";
 
 function CakeList({ posts }) {
-  var pages = [];
-  for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
+  let pages = [];
+  const postsCount = posts.length;
+  for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
     pages.push(i);
   }
-  var pagesCount = pages.length;
+  let pagesCount = pages.length;
+
   return (
     <div>
       <Head>
-        <title>Marsipan tortları</title>
+        <title>Purple Marsipan tortları</title>
       </Head>
       <Consumer>
         {({ state }) => (
@@ -35,14 +36,12 @@ function CakeList({ posts }) {
                               state.currentPage * state.perPage
                             )
                             .map((item, i) => {
-                              // {state.data.map((item, i) => {
                               return (
                                 <Card
                                   key={item.id}
                                   item={item}
                                   pageType={"marsipan"}
                                   addCart={state.addCart}
-                                  // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
                               );
                             })
@@ -52,28 +51,18 @@ function CakeList({ posts }) {
                               state.currentPage * state.perPage
                             )
                             .map((item, i) => {
-                              // {state.data.map((item, i) => {
                               return (
                                 <Card
                                   key={item.id}
                                   item={item}
                                   pageType={"marsipan"}
                                   addCart={state.addCart}
-                                  // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
                               );
                             })}
                     </div>
                     <div className="product_pagination">
                       <div className="left_btn">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            state.pageBack(pagesCount);
-                          }}
-                        >
-                          <i className="lnr lnr-arrow-left"></i>geri
-                        </a> */}
                       </div>
                       <div className="middle_list">
                         <nav aria-label="Page navigation example">
@@ -121,14 +110,6 @@ function CakeList({ posts }) {
                         </nav>
                       </div>
                       <div className="right_btn">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            state.pageForward(pagesCount);
-                          }}
-                        >
-                          növbəti<i className="lnr lnr-arrow-right"></i>
-                        </a> */}
                       </div>
                     </div>
                   </div>
@@ -325,17 +306,21 @@ function CakeList({ posts }) {
   );
 }
 
-const marsipanApi = "http://web:8000/marsipan/";
-// const marsipanApi = "http://192.168.31.51:8000/marsipan/"
-
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}marsipan/`)
-  const posts = await res.json();
+  const props = { posts: [] };
+
+  try {
+    const res = await fetch(`${apiUrl}marsipan/`);
+    const posts = await res.json();
+
+    props.posts = posts;
+  } catch (error) {
+    console.log("error", error);
+  }
+
   return {
-    props: {
-      posts,
-    },
-    // revalidate: 5,
+    props,
+    // revalidate: 1,
   };
 }
 

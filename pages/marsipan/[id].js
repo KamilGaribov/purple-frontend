@@ -5,18 +5,24 @@ import { Consumer } from "../../components/Provider";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Search from "../../components/search";
-import {apiUrl, } from "../../components/variables";
+import { apiUrl } from "../../components/variables";
+import Card from "../../components/card2";
 
-function Post({ post }) {
-  const router = useRouter()
+function Post({ post } = {}) {
+  const router = useRouter();
   const back = () => {
-    router.back()
-  }
+    router.back();
+  };
   const goOrder = (func) => {
     if(func){
       router.push("/sebet")
     }
   }
+
+  if (!post) {
+    return null;
+  }
+
   return (
     <div>
       <Head>
@@ -33,7 +39,11 @@ function Post({ post }) {
                     <div className="product_img">
                       <img
                         className="img-fluid"
-                        src={post.image ? post.image : "/img/product/product-details-1.jpg"}
+                        src={
+                          post.image
+                            ? post.image
+                            : "/img/cake-feature/c-feature-9.jpg"
+                        }
                         alt=""
                       />
                     </div>
@@ -42,15 +52,22 @@ function Post({ post }) {
                     <div className="product_details_text">
                       <h4>{post.name}</h4>
                       <p>
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                        aut odit aut fugit, sed quia consequ untur magni dolores
-                        eos qui ratione voluptatem sequi nesciunt. Neque porro
-                        quisquam est,
+                        <b>Ingredientər:</b> {post.ingredient}
                       </p>
-                      <h5>
-                        Qiymət: <span>{post.price}</span>{" "}
-                        <img src="/img/azn.png" className="card-azn" />
-                      </h5>
+                      <p>
+                        <b>Çəki:</b> {post.weight} kq
+                      </p>
+                      {post.discount ? (
+                        <p>
+                          <b>Qiymət:</b>{" "}
+                          <span className="product_discount">{post.price}</span>{" "}
+                          {post.discount} azn
+                        </p>
+                      ) : (
+                        <p>
+                          <b>Qiymət:</b> {post.price} azn
+                        </p>
+                      )}
                       <div className="quantity_box">
                         <label htmlFor="quantity">Miqdar: </label>
                         <input type="text" placeholder="1" id="quantity" />
@@ -63,16 +80,21 @@ function Post({ post }) {
                       >
                         səbətə əlavə et
                       </a>
-                      <Link href="/sebet">
-                        <a className="pink_more order_btn" onClick={() => {
+                      <a
+                        className="pink_more order_btn"
+                        onClick={() => {
                           goOrder(state.addCart(post, "marsipan", true))
-                        }}>sifariş ver</a>
-                      </Link>
+                        }}
+                      >
+                        sifariş ver
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="product_details_back"><i className="fa fa-chevron-left" onClick={back}/></div>
+              <div className="product_details_back">
+                <i className="fa fa-chevron-left" onClick={back} />
+              </div>
             </section>
             <section className="similar_product_area p_100">
               <div className="container">
@@ -80,7 +102,7 @@ function Post({ post }) {
                   <h2>Oxşar məhsullar</h2>
                 </div>
                 <div className="row similar_product_inner">
-                {post.similar1 ? (
+                  {post.similar1 ? (
                     <Card
                       item={post.similar1}
                       pageType={"marsipan"}
@@ -120,22 +142,36 @@ function Post({ post }) {
   );
 }
 
-const marsipanApi = "http://web:8000/marsipan/";
-// const marsipanApi = "http://192.168.31.51:8000/marsipan/"
 
 export async function getStaticPaths() {
-  const res = await fetch(`${apiUrl}marsipan/`)
-  const posts = await res.json();
-  const paths = posts.map((post) => {
-    return { params: { id: post.id.toString() } };
-  });
+  let paths = [];
+
+  try {
+    const res = await fetch(`${apiUrl}marsipan/`);
+    const posts = await res.json();
+
+    paths = posts.map((post) => {
+      return { params: { id: post.id.toString() } };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${apiUrl}marsipan/${params.id}/`)
-  const post = await res.json();
-  return { props: { post } };
+  const props = { post: {} };
+  try {
+    const res = await fetch(`${apiUrl}marsipan/${params.id}/`);
+    const post = await res.json();
+
+    props.post = post;
+  } catch (error) {
+    console.error(error);
+  }
+
+  return { props };
 }
 
 export default Post;

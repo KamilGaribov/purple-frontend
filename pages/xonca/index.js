@@ -8,15 +8,17 @@ import Card from "../../components/card";
 import { apiUrl, perPage } from "../../components/variables";
 
 function CakeList({ posts }) {
-  var pages = [];
-  for (let i = 1; i <= Math.ceil(posts.length / perPage); i++) {
+  let pages = [];
+  const postsCount = posts.length;
+  for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
     pages.push(i);
   }
-  var pagesCount = pages.length;
+  let pagesCount = pages.length;
+
   return (
     <div>
       <Head>
-        <title>Xonça</title>
+        <title>Purple Xonçalar</title>
       </Head>
       <Consumer>
         {({ state }) => (
@@ -34,14 +36,12 @@ function CakeList({ posts }) {
                               state.currentPage * state.perPage
                             )
                             .map((item, i) => {
-                              // {state.data.map((item, i) => {
                               return (
                                 <Card
                                   key={item.id}
                                   item={item}
                                   pageType={"xonca"}
                                   addCart={state.addCart}
-                                  // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
                               );
                             })
@@ -51,28 +51,18 @@ function CakeList({ posts }) {
                               state.currentPage * state.perPage
                             )
                             .map((item, i) => {
-                              // {state.data.map((item, i) => {
                               return (
                                 <Card
                                   key={item.id}
                                   item={item}
                                   pageType={"xonca"}
                                   addCart={state.addCart}
-                                  // avatar={`../../static/images/stadion/${i}.jpg`}
                                 />
                               );
                             })}
                     </div>
                     <div className="product_pagination">
                       <div className="left_btn">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            state.pageBack(pagesCount);
-                          }}
-                        >
-                          <i className="lnr lnr-arrow-left"></i>geri
-                        </a> */}
                       </div>
                       <div className="middle_list">
                         <nav aria-label="Page navigation example">
@@ -120,14 +110,6 @@ function CakeList({ posts }) {
                         </nav>
                       </div>
                       <div className="right_btn">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            state.pageForward(pagesCount);
-                          }}
-                        >
-                          növbəti<i className="lnr lnr-arrow-right"></i>
-                        </a> */}
                       </div>
                     </div>
                   </div>
@@ -288,17 +270,21 @@ function CakeList({ posts }) {
   );
 }
 
-// const vitrinApi = "http://192.168.31.51:8000/cake/"
-const vitrinApi = "http://web:8000/cake/";
-
 export async function getStaticProps() {
-  const res = await fetch(`${apiUrl}xonca/`);
-  const posts = await res.json();
+  const props = { posts: [] };
+
+  try {
+    const res = await fetch(`${apiUrl}xonca/`);
+    const posts = await res.json();
+
+    props.posts = posts;
+  } catch (error) {
+    console.log("error", error);
+  }
+
   return {
-    props: {
-      posts,
-    },
-    revalidate: 5,
+    props,
+    // revalidate: 1,
   };
 }
 

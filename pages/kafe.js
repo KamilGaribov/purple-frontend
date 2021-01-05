@@ -4,7 +4,7 @@ import { Consumer } from "../components/Provider";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Search from "../components/search";
-import {apiUrl, } from "../components/variables";
+import { apiUrl } from "../components/variables";
 
 export default function Cafe({ posts }) {
   return (
@@ -83,8 +83,6 @@ export default function Cafe({ posts }) {
   );
 }
 
-// const cafeApi = "http://192.168.31.51:8000/cafe/";
-const cafeApi = "http://web:8000/cafe/"
 
 export async function getStaticProps() {
   const res = await fetch(`${apiUrl}cafe/`);
