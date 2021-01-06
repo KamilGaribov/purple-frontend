@@ -601,9 +601,7 @@ class Provider extends Component {
           .querySelector(".billing_details_area input[name=email]")
           .parentElement.classList.add("input-div-error");
       }
-      // return console.log("ppost_________: ", this.state.input);
       this.setState({ orderControl: false });
-      // console.log("stringfy: ", JSON.stringify({data: this.state.input}))
       let form = {
         body: JSON.stringify({data: this.state.input, amount: amount, basket: basket}),
         method: "POST",

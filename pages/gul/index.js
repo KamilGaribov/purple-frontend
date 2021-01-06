@@ -40,7 +40,7 @@ function CakeList({ posts }) {
                                 <Card
                                   key={item.id}
                                   item={item}
-                                  pageType={"gul"}
+                                  pageType={"flower"}
                                   addCart={state.addCart}
                                 />
                               );
@@ -55,7 +55,7 @@ function CakeList({ posts }) {
                                 <Card
                                   key={item.id}
                                   item={item}
-                                  pageType={"gul"}
+                                  pageType={"flower"}
                                   addCart={state.addCart}
                                 />
                               );

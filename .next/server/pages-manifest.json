@@ -1,20 +1,6 @@
 {
   "/_app": "pages/_app.js",
-  "/gul/[id]": "pages/gul/[id].js",
-  "/gul": "pages/gul.js",
-  "/haqqimizda": "pages/haqqimizda.html",
-  "/": "pages/index.js",
-  "/kafe": "pages/kafe.js",
-  "/marsipan/[id]": "pages/marsipan/[id].js",
-  "/marsipan": "pages/marsipan.js",
-  "/sebet": "pages/sebet.html",
-  "/sebet/sifaris": "pages/sebet/sifaris.html",
-  "/sebet/sifarisverildi": "pages/sebet/sifarisverildi.html",
-  "/vitrin/[id]": "pages/vitrin/[id].js",
-  "/vitrin": "pages/vitrin.js",
-  "/xonca/[id]": "pages/xonca/[id].js",
-  "/xonca": "pages/xonca.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/": "pages/index.js"
 }

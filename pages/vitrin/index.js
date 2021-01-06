@@ -62,8 +62,7 @@ function CakeList({ posts }) {
                             })}
                     </div>
                     <div className="product_pagination">
-                      <div className="left_btn">\
-                      </div>
+                      <div className="left_btn"></div>
                       <div className="middle_list">
                         <nav aria-label="Page navigation example">
                           <ul className="pagination">

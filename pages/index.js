@@ -9,6 +9,7 @@ import Card from "../components/card2";
 import { Marker, apiUrl } from "../components/variables";
 
 export default function Home({ posts, types }) {
+  console.log(types)
   return (
     <Consumer>
       {({ state }) => (
@@ -200,6 +201,6 @@ export async function getStaticProps() {
       posts: posts.slice(0, 8),
       types,
     },
-    revalidate: 5,
+    // revalidate: 5,
   };
 }
