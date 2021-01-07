@@ -22,7 +22,9 @@ function Card(props) {
       <div className="cake_feature_item">
         <div className="cake_img">
           <Link href={`/${pageType}/[id]`} as={`/${pageType}/${item.id}`}>
-            <img src={src} alt={item.name}/>
+            <a>
+              <img src={src} alt={item.name} />
+            </a>
           </Link>
         </div>
         <div className="cake_text">
@@ -45,9 +47,7 @@ function Card(props) {
           </a>
         </div>
       </div>
-      <span id="item-type">
-        {item.category ? item.category.name : null}
-      </span>
+      <span id="item-type">{item.category ? item.category.name : null}</span>
     </div>
   );
 }
