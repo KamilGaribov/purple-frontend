@@ -178,7 +178,7 @@ function Navbar(props) {
                 <Link href="/">
                   <a>
                     <img
-                      src="/img/logo8.png"
+                      src="/img/logo4.png"
                       onClick={changeUrl}
                       className={
                         navActive == "Ana səhifə"
@@ -195,7 +195,7 @@ function Navbar(props) {
         <div className="navbar-logo-mob">
           <Link href="/">
             <img
-              src="/img/logo8.png"
+              src="/img/logo4.png"
               onClick={changeUrl}
               className={
                 navActive == "Ana səhifə"
