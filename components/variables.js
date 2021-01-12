@@ -3,4 +3,4 @@ export const perPage = 12
 
 
 // export const apiUrl = "http://192.168.31.51:8000/"
-export const apiUrl = "http://api.purplecakeboutique.az/"
+export const apiUrl = "https://api.purplecakeboutique.az/"
