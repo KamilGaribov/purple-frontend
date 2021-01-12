@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/vitrin": "pages/vitrin.js",
-  "/sebet/sifaris": "pages/sebet/sifaris.js",
-  "/vitrin/[id]": "pages/vitrin/[id].js"
+  "/": "pages/index.js",
+  "/vitrin/[id]": "pages/vitrin/[id].js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/vitrin": "pages/vitrin.js"
 }

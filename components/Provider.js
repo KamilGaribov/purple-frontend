@@ -23,7 +23,7 @@ class Provider extends Component {
     currentType: "hamısı",
     sortedData: null,
     pagesSorted: null,
-    navActive: "Home",
+    navActive: "Ana səhifə",
     sortData: (data, e) => {
       let type = e.target.innerHTML.toLowerCase();
       this.setState({ currentType: type });
@@ -60,10 +60,10 @@ class Provider extends Component {
         sortedData: null,
         pagesSorted: null,
       });
-      if (e.target.innerHTML == "Home") {
-        this.setState({ navActive: null });
-      } else {
+      if (e.target.innerHTML) {
         this.setState({ navActive: e.target.innerHTML });
+      } else {
+        this.setState({ navActive: "Ana səhifə" });
       }
     },
     showMap: () => {

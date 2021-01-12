@@ -35,7 +35,6 @@ export default function Home({ posts, types }) {
                       item={item}
                       pageType={types[i]}
                       addCart={state.addCart}
-                      // avatar={`../../static/images/stadion/${i}.jpg`}
                     />
                   );
                 })}

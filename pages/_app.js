@@ -8,7 +8,6 @@ import Router from "next/router";
 import GoogleMapReact from "google-map-react";
 import { Marker } from "../components/variables";
 
-// function MyApp({ Component, pageProps }) {
 class MyApp extends App {
   componentDidMount() {
     var decodedCookie = decodeURIComponent(document.cookie);

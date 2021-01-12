@@ -16,9 +16,6 @@ function Navbar(props) {
     a = a * b;
     return a.toFixed(2);
   }
-  // const setCount = (e) => {
-  //   let count
-  // }
   return (
     <header className="main_header_area">
       <div className="top_header_area row m0">
@@ -100,6 +97,16 @@ function Navbar(props) {
             >
               <ul className="navbar-nav mr-auto">
                 <li>
+                  <Link href="/">
+                    <a
+                      onClick={changeUrl}
+                      className={navActive == "Ana səhifə" ? "active" : null}
+                    >
+                      Ana səhifə
+                    </a>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/vitrin">
                     <a
                       onClick={changeUrl}
@@ -171,10 +178,10 @@ function Navbar(props) {
                 <Link href="/">
                   <a>
                     <img
-                      src="/img/logo6.png"
+                      src="/img/logo8.png"
                       onClick={changeUrl}
                       className={
-                        navActive == "Home"
+                        navActive == "Ana səhifə"
                           ? "navbar-logo-img active"
                           : "navbar-logo-img"
                       }
@@ -188,10 +195,10 @@ function Navbar(props) {
         <div className="navbar-logo-mob">
           <Link href="/">
             <img
-              src="/img/logo6.png"
+              src="/img/logo8.png"
               onClick={changeUrl}
               className={
-                navActive == "Home"
+                navActive == "Ana səhifə"
                   ? "navbar-logo-img active"
                   : "navbar-logo-img"
               }
