@@ -10,6 +10,28 @@ import { Marker } from "../components/variables";
 
 class MyApp extends App {
   componentDidMount() {
+    var url = window.location.pathname
+    if(url == "/"){
+      document.querySelector("ul.navbar-nav li a[data-name=home]").classList.add("active")
+    }
+    else if(url.startsWith("/vitrin")){
+      document.querySelector("ul.navbar-nav li a[data-name=vitrin]").classList.add("active")
+    }
+    else if(url.startsWith("/marsipan")){
+      document.querySelector("ul.navbar-nav li a[data-name=marsipan]").classList.add("active")
+    }
+    else if(url.startsWith("/kafe")){
+      document.querySelector("ul.navbar-nav li a[data-name=cafe]").classList.add("active")
+    }
+    else if(url.startsWith("/gul")){
+      document.querySelector("ul.navbar-nav li a[data-name=flower]").classList.add("active")
+    }
+    else if(url.startsWith("/xonca")){
+      document.querySelector("ul.navbar-nav li a[data-name=xonca]").classList.add("active")
+    }
+    else if(url.startsWith("/haqqimizda")){
+      document.querySelector("ul.navbar-nav li a[data-name=about]").classList.add("active")
+    }
     var decodedCookie = decodeURIComponent(document.cookie);
     var cookies = decodedCookie.split("; ");
     var basket = document.querySelector("#basketCount");

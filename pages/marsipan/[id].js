@@ -14,10 +14,10 @@ function Post({ post } = {}) {
     router.back();
   };
   const goOrder = (func) => {
-    if(func){
-      router.push("/sebet")
+    if (func) {
+      router.push("/sebet");
     }
-  }
+  };
 
   if (!post) {
     return null;
@@ -54,9 +54,15 @@ function Post({ post } = {}) {
                       <p>
                         <b>Ingredientər:</b> {post.ingredient}
                       </p>
-                      <p>
-                        <b>Çəki:</b> {post.weight} kq
-                      </p>
+                      {post.weight ? (
+                        <p>
+                          <b>Çəki:</b> {post.weight} kq
+                        </p>
+                      ) : (
+                        <p>
+                          <b>Ədəd:</b> 1
+                        </p>
+                      )}
                       {post.discount ? (
                         <p>
                           <b>Qiymət:</b>{" "}
@@ -83,7 +89,7 @@ function Post({ post } = {}) {
                       <a
                         className="pink_more order_btn"
                         onClick={() => {
-                          goOrder(state.addCart(post, "marsipan", true))
+                          goOrder(state.addCart(post, "marsipan", true));
                         }}
                       >
                         sifariş ver
@@ -141,7 +147,6 @@ function Post({ post } = {}) {
     </div>
   );
 }
-
 
 export async function getStaticPaths() {
   let paths = [];

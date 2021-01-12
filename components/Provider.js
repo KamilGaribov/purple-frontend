@@ -23,7 +23,7 @@ class Provider extends Component {
     currentType: "hamısı",
     sortedData: null,
     pagesSorted: null,
-    navActive: "Ana səhifə",
+    navActive: null,
     sortData: (data, e) => {
       let type = e.target.innerHTML.toLowerCase();
       this.setState({ currentType: type });
@@ -577,9 +577,11 @@ class Provider extends Component {
           basket[cookies[i].split(', ')[6].split('=')[0] + ":" + cookies[i].split(', ')[0]] = value
         }
       }
-      // return console.log(basket)
       if(isNaN(amount)){
         return alert("Səbət boşdur")
+      }
+      if(amount < 20){
+        return alert('Minimum sifariş məbləği 20.00 AZN-dir')
       }
       if (this.state.input.name == null || this.state.input.name == "") {
         return document

@@ -35,71 +35,8 @@ function About() {
                     fərqli çeşidlərlə şirniyyat və qurabiyə satışı da həyata keçirilir.
                   </h6>
                 </div>
-                <div className="row our_bakery_image">
-                  <div className="col-md-4 col-6">
-                    <img
-                      className="/img-fluid"
-                      src="img/our-bakery/bakery-1.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="col-md-4 col-6">
-                    <img
-                      className="/img-fluid"
-                      src="img/our-bakery/bakery-2.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="col-md-4 col-6">
-                    <img
-                      className="/img-fluid"
-                      src="img/our-bakery/bakery-3.jpg"
-                      alt=""
-                    />
-                  </div>
-                </div>
               </div>
             </section>
-            {/* <section className="our_mission_area p_100">
-              <div className="container">
-                <div className="row our_mission_inner">
-                  <div className="col-lg-3">
-                    <div className="single_m_title">
-                      <h2>Our Mission</h2>
-                    </div>
-                  </div>
-                  <div className="col-lg-9">
-                    <div className="mission_inner_text">
-                      <h6>
-                        Hər cür formada və qeyri-standart tortlar hazırlayırıq.
-                        Mütəxəssislərlə,peşəkar ustalarla ve heykəltaraşlarla
-                        çalışırıq. Biri birindən dadlı tortlar və şirniyyatların
-                        satışı gündəlik vitrindən satırıq.Hər bir tortumuz
-                        unikaldır, xüsusi cazibədarlığı və bənzərsiz dizaynı
-                        var. Hər bir bayram günlərində xususi və hər zövgə uyğun
-                        xonçalar hazırlanır.Bu gün kafe şəbəkəmizdə hər gün təzə
-                        şirniyyat tədarik edirik. Xüsusi, ev sayağı, fərqli
-                        çeşitlərlə qurabiyə satışı həyata keçirilir.
-                      </h6>
-                      <ul className="nav">
-                        <li>
-                          <a href="#">Custom cakes</a>
-                        </li>
-                        <li>
-                          <a href="#">Birthday cakes</a>
-                        </li>
-                        <li>
-                          <a href="#">Wedding cakes</a>
-                        </li>
-                        <li>
-                          <a href="#">European delicacies</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section> */}
             <section className="contact_form_area p_100">
               <div className="container">
                 <div className="main_title">

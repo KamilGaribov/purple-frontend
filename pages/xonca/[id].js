@@ -52,10 +52,7 @@ function Post({ post } = {}) {
                     <div className="product_details_text">
                       <h4>{post.name}</h4>
                       <p>
-                        <b>Ingredientər:</b> {post.ingredient}
-                      </p>
-                      <p>
-                        <b>Çəki:</b> {post.weight} kq
+                        <b>Ədəd:</b> 1
                       </p>
                       {post.discount ? (
                         <p>

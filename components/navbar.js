@@ -101,6 +101,7 @@ function Navbar(props) {
                     <a
                       onClick={changeUrl}
                       className={navActive == "Ana səhifə" ? "active" : null}
+                      data-name="home"
                     >
                       Ana səhifə
                     </a>
@@ -111,6 +112,7 @@ function Navbar(props) {
                     <a
                       onClick={changeUrl}
                       className={navActive == "Vitrin" ? "active" : null}
+                      data-name="vitrin"
                     >
                       Vitrin
                     </a>
@@ -123,6 +125,7 @@ function Navbar(props) {
                       className={
                         navActive == "Marsipan tortlar" ? "active" : null
                       }
+                      data-name="marsipan"
                     >
                       Marsipan tortlar
                     </a>
@@ -133,6 +136,7 @@ function Navbar(props) {
                     <a
                       onClick={changeUrl}
                       className={navActive == "Kafe" ? "active" : null}
+                      data-name="cafe"
                     >
                       Kafe
                     </a>
@@ -145,6 +149,7 @@ function Navbar(props) {
                     <a
                       onClick={changeUrl}
                       className={navActive == "Gül" ? "active" : null}
+                      data-name="flower"
                     >
                       Gül
                     </a>
@@ -155,6 +160,7 @@ function Navbar(props) {
                     <a
                       onClick={changeUrl}
                       className={navActive == "Xonça" ? "active" : null}
+                      data-name="xonca"
                     >
                       Xonça
                     </a>
@@ -165,6 +171,7 @@ function Navbar(props) {
                     <a
                       onClick={changeUrl}
                       className={navActive == "Haqqımızda" ? "active" : null}
+                      data-name="about"
                     >
                       Haqqımızda
                     </a>
@@ -185,6 +192,7 @@ function Navbar(props) {
                           ? "navbar-logo-img active"
                           : "navbar-logo-img"
                       }
+                      data-name="home"
                     />
                   </a>
                 </Link>
@@ -202,6 +210,7 @@ function Navbar(props) {
                   ? "navbar-logo-img active"
                   : "navbar-logo-img"
               }
+              data-name="home"
             />
           </Link>
         </div>
