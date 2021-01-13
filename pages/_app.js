@@ -10,49 +10,49 @@ import { Marker } from "../components/variables";
 
 class MyApp extends App {
   componentDidMount() {
-    var url = window.location.pathname
-    if(url == "/"){
-      document.querySelector("ul.navbar-nav li a[data-name=home]").classList.add("active")
+    var url = window.location.pathname;
+    if (url == "/") {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=home]")
+        .classList.add("active");
+    } else if (url.startsWith("/vitrin")) {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=vitrin]")
+        .classList.add("active");
+    } else if (url.startsWith("/marsipan")) {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=marsipan]")
+        .classList.add("active");
+    } else if (url.startsWith("/kafe")) {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=cafe]")
+        .classList.add("active");
+    } else if (url.startsWith("/gul")) {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=flower]")
+        .classList.add("active");
+    } else if (url.startsWith("/xonca")) {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=xonca]")
+        .classList.add("active");
+    } else if (url.startsWith("/haqqimizda")) {
+      document
+        .querySelector("ul.navbar-nav li a[data-name=about]")
+        .classList.add("active");
     }
-    else if(url.startsWith("/vitrin")){
-      document.querySelector("ul.navbar-nav li a[data-name=vitrin]").classList.add("active")
-    }
-    else if(url.startsWith("/marsipan")){
-      document.querySelector("ul.navbar-nav li a[data-name=marsipan]").classList.add("active")
-    }
-    else if(url.startsWith("/kafe")){
-      document.querySelector("ul.navbar-nav li a[data-name=cafe]").classList.add("active")
-    }
-    else if(url.startsWith("/gul")){
-      document.querySelector("ul.navbar-nav li a[data-name=flower]").classList.add("active")
-    }
-    else if(url.startsWith("/xonca")){
-      document.querySelector("ul.navbar-nav li a[data-name=xonca]").classList.add("active")
-    }
-    else if(url.startsWith("/haqqimizda")){
-      document.querySelector("ul.navbar-nav li a[data-name=about]").classList.add("active")
-    }
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var cookies = decodedCookie.split("; ");
     var basket = document.querySelector("#basketCount");
-    var count = 0;
-    for (let i = 0; i < cookies.length; i++) {
-      if (cookies[i].split("=")[1] == "added to shop cart") {
-        count++;
-      }
+    if (window.localStorage.getItem("basket")) {
+      basket.innerHTML = JSON.parse(window.localStorage.getItem("basket")).length
+    } else {
+      basket.innerHTML = 0;
     }
-    basket.innerHTML = count;
     Router.events.on("routeChangeComplete", (url) => {
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
       var basket = document.querySelector("#basketCount");
-      var count = 0;
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split("=")[1] == "added to shop cart") {
-          count++;
-        }
+      if (window.localStorage.getItem("basket")) {
+        basket.innerHTML = JSON.parse(window.localStorage.getItem("basket")).length
+      } else {
+        basket.innerHTML = 0;
       }
-      basket.innerHTML = count;
     });
   }
   render() {

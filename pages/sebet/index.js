@@ -35,17 +35,17 @@ function Basket() {
                           return (
                             <tr key={i}>
                               <td>
-                                <Link href={`/${item[6]}/[id]`} as={`/${item[6]}/${item[0]}`}>
-                                  <img src={item[1]} alt="" />
+                                <Link href={`/${item.type}/[id]`} as={`/${item.type}/${item.id}`}>
+                                  <img src={item.image} alt="" />
                                 </Link>
                               </td>
-                              <td>{item[2]}</td>
-                              <td>{item[3]}</td>
+                              <td>{item.name}</td>
+                              <td>{item.price}</td>
                               <td>
                                 <select
                                   className="product_select"
                                   onChange={(e) => state.changeBasket(e, item)}
-                                  value={item[4]}
+                                  value={item.quantity}
                                 >
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -54,7 +54,7 @@ function Basket() {
                                   <option value="5">5</option>
                                 </select>
                               </td>
-                              <td>{item[5]}</td>
+                              <td>{item.total}</td>
                               <td>
                                 <i
                                   className="fa fa-close"

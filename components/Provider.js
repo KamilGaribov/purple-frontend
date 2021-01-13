@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { apiUrl, perPage } from './variables';
+import { apiUrl, perPage } from "./variables";
 
 const Context = React.createContext();
 
@@ -7,7 +7,6 @@ class Provider extends Component {
   state = {
     error: false,
     setOrderError: () => {
-      console.log("new github")
       this.setState({ orderError: true });
     },
     orderControl: false,
@@ -27,14 +26,12 @@ class Provider extends Component {
     sortData: (data, e) => {
       let type = e.target.innerHTML.toLowerCase();
       this.setState({ currentType: type });
-      // let perPage = perPage;
       let pagesSorted = [];
       if (type == "hamısı") {
         for (let i = 1; i <= Math.ceil(data.length / perPage); i++) {
           pagesSorted.push(i);
         }
-        // this.setState({ sortedData: data });
-        this.setState({sortedData: null})
+        this.setState({ sortedData: null });
       } else {
         let sortedData = [];
         for (let i = 0; i < data.length; i++) {
@@ -74,219 +71,131 @@ class Provider extends Component {
     basketCount: null,
     basketTotal: null,
     showBasket: () => {
-      let basketItems = [];
       let basket = document.querySelector(".basket");
       if (basket.classList.contains("display-block")) {
         return basket.classList.remove("display-block");
       } else {
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var cookies = decodedCookie.split("; ");
         let basketTotal = 0;
-        for (let i = 0; i < cookies.length; i++) {
-          if (cookies[i].split("=")[1] == "added to shop cart") {
-            let arr = [];
-            cookies[i] = cookies[i].split("=")[0];
-            arr.push(cookies[i].split(", ")[0]);
-            arr.push(cookies[i].split(", ")[1]);
-            arr.push(cookies[i].split(", ")[2]);
-            arr.push(cookies[i].split(", ")[3]);
-            arr.push(cookies[i].split(", ")[4]);
-            arr.push(cookies[i].split(", ")[5]);
-            arr.push(cookies[i].split(", ")[6]);
-            basketItems.push(arr);
-            basketTotal += parseFloat(cookies[i].split(", ")[5]);
+        if (JSON.parse(window.localStorage.getItem("basket"))) {
+          var localStorage = JSON.parse(window.localStorage.getItem("basket"));
+          for (let i = 0; i < localStorage.length; i++) {
+            basketTotal += parseFloat(localStorage[i].total);
           }
+        } else {
+          var localStorage = [];
         }
         basketTotal = parseFloat(basketTotal).toFixed(2);
-        this.setState({ basketCount: basketItems.length });
-        this.setState({ basketItems: basketItems });
+        this.setState({ basketCount: localStorage.length });
+        this.setState({ basketItems: localStorage });
         this.setState({ basketTotal: basketTotal });
-        basket.classList.add("display-block");
+        return basket.classList.add("display-block");
       }
     },
     changeBasket: (e, item) => {
-      var days = 30;
-      var d = new Date();
-      d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-      var expires = "expires=" + d.toUTCString();
-      document.cookie =
-        `${item[0]}, ${item[1]}, ${item[2]}, ${item[3]}, ${item[4]}, ${item[5]}, ${item[6]}` +
-        "=" +
-        "added to shop cart" +
-        ";" +
-        "expires=Thu, 01 Jan 1970 00:00:01 GMT" +
-        ";path=/";
-      let total = (parseFloat(e.target.value) * parseFloat(item[3])).toFixed(2);
-      document.cookie =
-        `${item[0]}, ${item[1]}, ${item[2]}, ${item[3]}, ${e.target.value}, ${total}, ${item[6]}` +
-        "=" +
-        "added to shop cart" +
-        ";" +
-        expires +
-        ";path=/";
-      let basketItems = [];
-      let basket = document.querySelector(".basket");
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
-      if (cookies[0].slice(2, 7) == "http") {
-        return basket.classList.add("display-block");
-      }
+      let bskt = JSON.parse(window.localStorage.getItem("basket"));
+      let newBskt = [];
       let basketTotal = 0;
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split("=")[1] == "added to shop cart") {
-          cookies[i] = cookies[i].split("=")[0];
-          let arr = [];
-          arr.push(cookies[i].split(", ")[0]);
-          arr.push(cookies[i].split(", ")[1]);
-          arr.push(cookies[i].split(", ")[2]);
-          arr.push(cookies[i].split(", ")[3]);
-          arr.push(cookies[i].split(", ")[4]);
-          arr.push(cookies[i].split(", ")[5]);
-          arr.push(cookies[i].split(", ")[6]);
-          basketItems.push(arr);
-          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+      for (let i = 0; i < bskt.length; i++) {
+        if (bskt[i].id == item.id && bskt[i].type == item.type) {
+          bskt[i].quantity = parseFloat(e.target.value);
+          bskt[i].total = (
+            parseFloat(e.target.value) * parseFloat(bskt[i].price)
+          ).toFixed(2);
         }
+        newBskt.push(bskt[i]);
+        basketTotal += parseFloat(bskt[i].total);
       }
+      window.localStorage.setItem("basket", JSON.stringify(newBskt));
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      this.setState({ basketCount: basketItems.length });
-      this.setState({ basketItems: basketItems });
+      this.setState({ basketCount: newBskt.length });
+      this.setState({ basketItems: newBskt });
       this.setState({ basketTotal: basketTotal });
     },
     deleteBasket: (e, item) => {
-      // let basket = document.querySelector(".basket");
-      let tr = e.target.closest("tr");
-      let item4 = tr.querySelector(".product_select").value;
-      document.cookie =
-        `${item[0]}, ${item[1]}, ${item[2]}, ${item[3]}, ${item4}, ${item[5]}, ${item[6]}` +
-        "=" +
-        "added to shop cart" +
-        ";" +
-        "expires=Thu, 01 Jan 1970 00:00:01 GMT" +
-        ";path=/";
-      let basketItems = [];
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
+      let bskt = JSON.parse(window.localStorage.getItem("basket"));
+      let newBskt = [];
       let basketTotal = 0;
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split("=")[1] == "added to shop cart") {
-          cookies[i] = cookies[i].split("=")[0];
-          let arr = [];
-          arr.push(cookies[i].split(", ")[0]);
-          arr.push(cookies[i].split(", ")[1]);
-          arr.push(cookies[i].split(", ")[2]);
-          arr.push(cookies[i].split(", ")[3]);
-          arr.push(cookies[i].split(", ")[4]);
-          arr.push(cookies[i].split(", ")[5]);
-          arr.push(cookies[i].split(", ")[6]);
-          basketItems.push(arr);
-          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+      for (let i = 0; i < bskt.length; i++) {
+        if (
+          parseInt(bskt[i].id) == parseInt(item.id) &&
+          bskt[i].type == item.type
+        ) {
+        } else {
+          newBskt.push(bskt[i]);
+          basketTotal += parseFloat(bskt[i].total);
         }
       }
+      window.localStorage.setItem("basket", JSON.stringify(newBskt));
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      // if (basketItems[0][0] == "") {
-      //   this.setState({ basketCount: null });
-      //   this.setState({ basketItems: null });
-      //   this.setState({ basketTotal: null });
-      // } else {
-      this.setState({ basketCount: basketItems.length });
-      this.setState({ basketItems: basketItems });
+      this.setState({ basketCount: newBskt.length });
+      this.setState({ basketItems: newBskt });
       this.setState({ basketTotal: basketTotal });
-      // }
     },
     addCart: (item, type, order) => {
       let basket = document.querySelector(".basket");
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
-      for (let i = 0; i < cookies.length; i++) {
-        cookies[i] = cookies[i].split("=")[0];
-        cookies[i] = cookies[i].split(", ")[2];
-      }
-      if (cookies.indexOf(item.name) == -1) {
-        if (basket.classList.contains("display-block")) {
-          basket.classList.remove("display-block");
-        }
-        var days = 30;
-        var d = new Date();
-        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-        var expires = "expires=" + d.toUTCString();
-        if (item.image) {
-          var src = item.image;
-        } else {
-          var src = "/img/cake-feature/c-feature-9.jpg";
-        }
-        if (item.discount) {
-          var price = item.discount;
-        } else {
-          var price = item.price;
-        }
-        document.cookie =
-          // `${type}/${item.id}, ${src}, ${item.name}, ${price}, 1, ${item.price}` +
-          `${item.id}, ${src}, ${item.name}, ${price}, 1, ${price}, ${type}` +
-          "=" +
-          "added to shop cart" +
-          ";" +
-          expires +
-          ";path=/";
-      } else {
-        alert("Bu məhsul artıq səbətə əlavə edilmişdir");
-      }
-      let basketItems = [];
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
-      // if (cookies[0].slice(3, 7) != "http") {
-      //   return basket.classList.add("display-block");
-      // }
       let basketTotal = 0;
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split("=")[1] == "added to shop cart") {
-          cookies[i] = cookies[i].split("=")[0];
-          let arr = [];
-          arr.push(cookies[i].split(", ")[0]);
-          arr.push(cookies[i].split(", ")[1]);
-          arr.push(cookies[i].split(", ")[2]);
-          arr.push(cookies[i].split(", ")[3]);
-          arr.push(cookies[i].split(", ")[4]);
-          arr.push(cookies[i].split(", ")[5]);
-          arr.push(cookies[i].split(", ")[6]);
-          basketItems.push(arr);
-          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+      if (basket.classList.contains("display-block")) {
+        basket.classList.remove("display-block");
+      }
+      if (item.image) {
+        var src = item.image;
+      } else {
+        var src = "/img/cake-feature/c-feature-9.jpg";
+      }
+      if (item.discount) {
+        var price = item.discount;
+      } else {
+        var price = item.price;
+      }
+      let bskt = {};
+      bskt.id = item.id;
+      bskt.image = src;
+      bskt.name = item.name;
+      bskt.price = price;
+      bskt.quantity = 1;
+      bskt.total = price;
+      bskt.type = type;
+      if (JSON.parse(window.localStorage.getItem("basket"))) {
+        var localStorage = JSON.parse(window.localStorage.getItem("basket"));
+      } else {
+        var localStorage = [];
+      }
+      for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage[i].id == item.id && localStorage[i].type == type) {
+          if (order) {
+            return true;
+          }
+          this.state.showBasket();
+          return alert("Bu məhsul artıq səbətə əlavə edilmişdir");
         }
       }
+      localStorage.push(bskt);
+      for (let i = 0; i < localStorage.length; i++) {
+        basketTotal += parseFloat(localStorage[i].total);
+      }
+      window.localStorage.setItem("basket", JSON.stringify(localStorage));
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      this.setState({ basketCount: basketItems.length });
-      this.setState({ basketItems: basketItems });
+      this.setState({ basketCount: localStorage.length });
+      this.setState({ basketItems: localStorage });
       this.setState({ basketTotal: basketTotal });
-      if(order){
-        return true
+      if (order) {
+        return true;
       }
       basket.classList.add("display-block");
     },
     getBasketItems: () => {
-      let basketItems = [];
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
-      // if (cookies[0].slice(3, 7) != "http") {
-      //   return this.setState({ basketItems: basketItems });
-      // }
       let basketTotal = 0;
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split("=")[1] == "added to shop cart") {
-          cookies[i] = cookies[i].split("=")[0];
-          let arr = [];
-          arr.push(cookies[i].split(", ")[0]);
-          arr.push(cookies[i].split(", ")[1]);
-          arr.push(cookies[i].split(", ")[2]);
-          arr.push(cookies[i].split(", ")[3]);
-          arr.push(cookies[i].split(", ")[4]);
-          arr.push(cookies[i].split(", ")[5]);
-          arr.push(cookies[i].split(", ")[6]);
-          basketItems.push(arr);
-          basketTotal += parseFloat(cookies[i].split(", ")[5]);
+      if (JSON.parse(window.localStorage.getItem("basket"))) {
+        var localStorage = JSON.parse(window.localStorage.getItem("basket"));
+        for (let i = 0; i < localStorage.length; i++) {
+          basketTotal += parseFloat(localStorage[i].total);
         }
+      } else {
+        var localStorage = [];
       }
       basketTotal = parseFloat(basketTotal).toFixed(2);
-      this.setState({ basketCount: basketItems.length });
-      this.setState({ basketItems: basketItems });
+      this.setState({ basketCount: localStorage.length });
+      this.setState({ basketItems: localStorage });
       this.setState({ basketTotal: basketTotal });
     },
 
@@ -340,7 +249,7 @@ class Provider extends Component {
       }
       // let url = `http://192.168.31.51:8000/contact/`;
       // let url = `http://api.purplecakeboutique.az/contact/`;
-      let url = `${apiUrl}contact/`
+      let url = `${apiUrl}contact/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
@@ -562,26 +471,30 @@ class Provider extends Component {
       address2: null,
       email: "E",
       note: null,
-      amount: 1
+      amount: 1,
     },
     query: "?",
     postOrderForm: () => {
       var decodedCookie = decodeURIComponent(document.cookie);
       var cookies = decodedCookie.split("; ");
-      var amount = 0
-      let basket = {}
+      var amount = 0;
+      let basket = {};
       for (let i = 0; i < cookies.length; i++) {
-        if(cookies[i].split('=')[1] == 'added to shop cart'){
-          amount += parseFloat(cookies[i].split(', ')[5]);
-          let value = cookies[i].split(', ')[4]
-          basket[cookies[i].split(', ')[6].split('=')[0] + ":" + cookies[i].split(', ')[0]] = value
+        if (cookies[i].split("=")[1] == "added to shop cart") {
+          amount += parseFloat(cookies[i].split(", ")[5]);
+          let value = cookies[i].split(", ")[4];
+          basket[
+            cookies[i].split(", ")[6].split("=")[0] +
+              ":" +
+              cookies[i].split(", ")[0]
+          ] = value;
         }
       }
-      if(isNaN(amount)){
-        return alert("Səbət boşdur")
+      if (isNaN(amount)) {
+        return alert("Səbət boşdur");
       }
-      if(amount < 20){
-        return alert('Minimum sifariş məbləği 20.00 AZN-dir')
+      if (amount < 20) {
+        return alert("Minimum sifariş məbləği 20.00 AZN-dir");
       }
       if (this.state.input.name == null || this.state.input.name == "") {
         return document
@@ -605,7 +518,11 @@ class Provider extends Component {
       }
       this.setState({ orderControl: false });
       let form = {
-        body: JSON.stringify({data: this.state.input, amount: amount, basket: basket}),
+        body: JSON.stringify({
+          data: this.state.input,
+          amount: amount,
+          basket: basket,
+        }),
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // method: "GET",
@@ -613,17 +530,15 @@ class Provider extends Component {
       };
       // let url = "http://192.168.31.51:8000/test/";
       // let url = "http://api.purplecakeboutique.az/test/"
-      let url = `${apiUrl}test/`
+      let url = `${apiUrl}test/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
-          console.log("response_: ", response);
           if (response.Status == "00") {
             var decodedCookie = decodeURIComponent(document.cookie);
             var cookies = decodedCookie.split("; ");
             for (let i = 0; i < cookies.length; i++) {
               if (cookies[i].split("=")[1] == "added to shop cart") {
-                console.log("it is");
                 document.cookie =
                   cookies[i].split("=")[0] +
                   "=" +
@@ -633,9 +548,9 @@ class Provider extends Component {
                   ";path=/";
               }
             }
-            return window.location = response.url;
+            return (window.location = response.url);
           }
-          alert("Biraz sonra cəhd edin", response.Status)
+          alert("Biraz sonra cəhd edin", response.Status);
         })
         .catch((error) => {
           console.log("error: ", error);

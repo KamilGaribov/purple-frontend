@@ -235,19 +235,19 @@ function Navbar(props) {
                       <tr key={i}>
                         <td>
                           <Link
-                            href={`/${item[6]}/[id]`}
-                            as={`/${item[6]}/${item[0]}`}
+                            href={`/${item.type}/[id]`}
+                            as={`/${item.type}/${item.id}`}
                           >
-                            <img src={item[1]} alt="" />
+                            <img src={item.image} alt="" />
                           </Link>
                         </td>
-                        <td>{item[2]}</td>
-                        <td className="basket-price">{item[3]}</td>
+                        <td>{item.name}</td>
+                        <td className="basket-price">{item.price}</td>
                         <td>
                           <select
                             className="product_select"
                             onChange={(e) => changeBasket(e, item)}
-                            value={item[4]}
+                            value={item.quantity}
                           >
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -256,7 +256,7 @@ function Navbar(props) {
                             <option value="5">5</option>
                           </select>
                         </td>
-                        <td className="basket-total">{item[5]}</td>
+                        <td className="basket-total">{item.total}</td>
                         <td>
                           <i
                             className="fa fa-close"

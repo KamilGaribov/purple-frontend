@@ -3,6 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/vitrin": "pages/vitrin.js",
-  "/vitrin/[id]": "pages/vitrin/[id].js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/sebet": "pages/sebet.js"
 }
