@@ -144,7 +144,7 @@ function Order() {
                             <li>Çatdırılma pulsuzdur</li>
                             <li>Məhsul geri qaytarılmır</li>
                             <li>Ödəniş kart vasitəsi ilə qəbul olunur</li>
-                            <li>Minimum ödəniş məbləği 20 AZN-dir</li>
+                            <li>Minimum sifariş məbləği 20 AZN-dir</li>
                             <li>Qaynar xətt: +994 51 746 8384</li>
                           </ul>
                           <div className="payment-cart">
