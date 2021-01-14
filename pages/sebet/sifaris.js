@@ -26,8 +26,6 @@ function Order() {
                     <div className="billing_form_area">
                       <form
                         className="billing_form row"
-                        // action="https://designarc.biz/demos/cake/theme/cake-html/contact_process.php"
-                        // method="post"
                         id="contactForm"
                         noValidate="novalidate"
                         onSubmit={state.order}
@@ -71,7 +69,6 @@ function Order() {
                             value="Bakı"
                             spellCheck="false"
                             tabIndex="-1"
-                            // onBlur={state.inputHandler}
                             readOnly
                           />
                         </div>
@@ -147,6 +144,7 @@ function Order() {
                             <li>Çatdırılma pulsuzdur</li>
                             <li>Məhsul geri qaytarılmır</li>
                             <li>Ödəniş kart vasitəsi ilə qəbul olunur</li>
+                            <li>Minimum ödəniş məbləği 20 AZN-dir</li>
                             <li>Qaynar xətt: +994 51 746 8384</li>
                           </ul>
                           <div className="payment-cart">
@@ -208,94 +206,6 @@ function Order() {
                             Cəm <span>{state.basketTotal}</span>
                           </h3>
                         </div>
-                        {/* <div id="accordion" className="accordion_area">
-                          <div className="card">
-                            <div className="card-header" id="headingOne">
-                              <h5 className="mb-0">
-                                <button
-                                  className="btn btn-link"
-                                  data-toggle="collapse"
-                                  data-target="#collapseOne"
-                                  aria-expanded="true"
-                                  aria-controls="collapseOne"
-                                >
-                                  Direct Bank Transfer
-                                </button>
-                              </h5>
-                            </div>
-                            <div
-                              id="collapseOne"
-                              className="collapse show"
-                              aria-labelledby="headingOne"
-                              data-parent="#accordion"
-                            >
-                              <div className="card-body">
-                                Make your payment directly into our bank
-                                account. Please use your Order ID as the payment
-                                reference. Your order won’t be shipped until the
-                                funds have cleared in our account.
-                              </div>
-                            </div>
-                          </div>
-                          <div className="card">
-                            <div className="card-header" id="headingTwo">
-                              <h5 className="mb-0">
-                                <button
-                                  className="btn btn-link collapsed"
-                                  data-toggle="collapse"
-                                  data-target="#collapseTwo"
-                                  aria-expanded="false"
-                                  aria-controls="collapseTwo"
-                                >
-                                  Check Payment
-                                </button>
-                              </h5>
-                            </div>
-                            <div
-                              id="collapseTwo"
-                              className="collapse"
-                              aria-labelledby="headingTwo"
-                              data-parent="#accordion"
-                            >
-                              <div className="card-body">
-                                Make your payment directly into our bank
-                                account. Please use your Order ID as the payment
-                                reference. Your order won’t be shipped until the
-                                funds have cleared in our account.
-                              </div>
-                            </div>
-                          </div>
-                          <div className="card">
-                            <div className="card-header" id="headingThree">
-                              <h5 className="mb-0">
-                                <button
-                                  className="btn btn-link collapsed"
-                                  data-toggle="collapse"
-                                  data-target="#collapseThree"
-                                  aria-expanded="false"
-                                  aria-controls="collapseThree"
-                                >
-                                  Paypal
-                                  <img src="/img/checkout-card.png" alt="" />
-                                </button>
-                                <a href="#">What is PayPal?</a>
-                              </h5>
-                            </div>
-                            <div
-                              id="collapseThree"
-                              className="collapse"
-                              aria-labelledby="headingThree"
-                              data-parent="#accordion"
-                            >
-                              <div className="card-body">
-                                Make your payment directly into our bank
-                                account. Please use your Order ID as the payment
-                                reference. Your order won’t be shipped until the
-                                funds have cleared in our account.
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   </div>
