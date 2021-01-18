@@ -250,13 +250,25 @@ function CakeList({ posts }) {
                           <li>
                             <a
                               className={
-                                state.currentType == "qarışıq" ? "active" : null
+                                state.currentType == "piroq" ? "active" : null
                               }
                               onClick={(e) => {
                                 state.sortData(posts, e);
                               }}
                             >
-                              Qarışıq
+                              Piroq
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className={
+                                state.currentType == "qelyanalti" ? "active" : null
+                              }
+                              onClick={(e) => {
+                                state.sortData(posts, e);
+                              }}
+                            >
+                              Qəlyanaltı
                             </a>
                           </li>
                           <li>
