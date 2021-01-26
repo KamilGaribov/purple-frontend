@@ -208,6 +208,29 @@ class Provider extends Component {
     },
     cPost: "",
     postContact: () => {
+      // let form = {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     name: "Aslan",
+      //     email: "aslan@gmail.com",
+      //     gender: "male",
+      //   }),
+      //   headers: {
+      //     "Content-type": "application/json; charset=UTF-8",
+      //     Authorization: localStorage.getItem("token"),
+      //   },
+      // };
+      // let url = "http://localhost:8000/income/";
+      // fetch(url, form)
+      //   .then((res) => res.json())
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log("salam");
+      //     console.log(error);
+      //   });
+      // return true;
       let form = {
         method: "POST",
         body: JSON.stringify({
@@ -249,7 +272,7 @@ class Provider extends Component {
       }
       // let url = `http://192.168.31.51:8000/contact/`;
       // let url = `http://api.purplecakeboutique.az/contact/`;
-      let url = `${apiUrl}contact/`;
+      // let url = `${apiUrl}contact/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
@@ -464,31 +487,22 @@ class Provider extends Component {
     },
 
     input: {
-      name: "K",
-      surname: "G",
+      name: null,
+      surname: null,
       city: "Baki",
-      address: "A",
+      address: null,
       address2: null,
-      email: "E",
+      email: null,
       note: null,
-      amount: 1,
+      amount: 0,
     },
     query: "?",
     postOrderForm: () => {
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var cookies = decodedCookie.split("; ");
       var amount = 0;
       let basket = {};
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split("=")[1] == "added to shop cart") {
-          amount += parseFloat(cookies[i].split(", ")[5]);
-          let value = cookies[i].split(", ")[4];
-          basket[
-            cookies[i].split(", ")[6].split("=")[0] +
-              ":" +
-              cookies[i].split(", ")[0]
-          ] = value;
-        }
+      var localStorage = JSON.parse(window.localStorage.getItem("basket"));
+      for (let i = 0; i < localStorage.length; i++) {
+        amount += parseFloat(localStorage[i].total);
       }
       if (isNaN(amount)) {
         return alert("Səbət boşdur");
