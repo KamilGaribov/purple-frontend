@@ -500,9 +500,17 @@ class Provider extends Component {
     postOrderForm: () => {
       var amount = 0;
       let basket = {};
-      var localStorage = JSON.parse(window.localStorage.getItem("basket"));
-      for (let i = 0; i < localStorage.length; i++) {
-        amount += parseFloat(localStorage[i].total);
+      if (JSON.parse(window.localStorage.getItem("basket"))) {
+        var localStorage = JSON.parse(window.localStorage.getItem("basket"));
+        for (let i = 0; i < localStorage.length; i++) {
+          console.log("salam");
+          console.log(parseFloat(localStorage[i].total));
+          amount += parseFloat(localStorage[i].total);
+          basket[localStorage[i].type + ":" + localStorage[i].id] = localStorage[i].quantity
+        }
+      }
+      else{
+        var localStorage = []
       }
       if (isNaN(amount)) {
         return alert("Səbət boşdur");
@@ -547,7 +555,7 @@ class Provider extends Component {
         .then((res) => res.json())
         .then((response) => {
           if (response.Status == "00") {
-            window.localStorage.removeItem("basket")
+            window.localStorage.removeItem("basket");
             return (window.location = response.url);
           }
           alert("Xəta baş verdi, yeniden cəhd edin");
