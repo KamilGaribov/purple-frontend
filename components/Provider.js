@@ -542,29 +542,15 @@ class Provider extends Component {
         // method: "GET",
         // headers: {'Content-Type': 'application/xml'},
       };
-      // let url = "http://192.168.31.51:8000/test/";
-      // let url = "http://api.purplecakeboutique.az/test/"
       let url = `${apiUrl}test/`;
       fetch(url, form)
         .then((res) => res.json())
         .then((response) => {
           if (response.Status == "00") {
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var cookies = decodedCookie.split("; ");
-            for (let i = 0; i < cookies.length; i++) {
-              if (cookies[i].split("=")[1] == "added to shop cart") {
-                document.cookie =
-                  cookies[i].split("=")[0] +
-                  "=" +
-                  "added to shop cart" +
-                  ";" +
-                  "expires=Thu, 01 Jan 1970 00:00:01 GMT" +
-                  ";path=/";
-              }
-            }
+            window.localStorage.removeItem("basket")
             return (window.location = response.url);
           }
-          alert("Biraz sonra cəhd edin", response.Status);
+          alert("Xəta baş verdi, yeniden cəhd edin");
         })
         .catch((error) => {
           console.log("error: ", error);
