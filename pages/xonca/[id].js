@@ -54,6 +54,11 @@ function Post({ post } = {}) {
                       <p>
                         <b>Ədəd:</b> 1
                       </p>
+                      {post.ingredient ? (
+                        <p>
+                          <b>Tərkibi:</b> {post.ingredient}
+                        </p>
+                      ) : null}
                       {post.discount ? (
                         <p>
                           <b>Qiymət:</b>{" "}

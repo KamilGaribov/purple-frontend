@@ -208,29 +208,6 @@ class Provider extends Component {
     },
     cPost: "",
     postContact: () => {
-      // let form = {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     name: "Aslan",
-      //     email: "aslan@gmail.com",
-      //     gender: "male",
-      //   }),
-      //   headers: {
-      //     "Content-type": "application/json; charset=UTF-8",
-      //     Authorization: localStorage.getItem("token"),
-      //   },
-      // };
-      // let url = "http://localhost:8000/income/";
-      // fetch(url, form)
-      //   .then((res) => res.json())
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log("salam");
-      //     console.log(error);
-      //   });
-      // return true;
       let form = {
         method: "POST",
         body: JSON.stringify({

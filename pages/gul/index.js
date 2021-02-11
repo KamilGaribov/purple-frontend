@@ -7,7 +7,7 @@ import Search from "../../components/search";
 import Card from "../../components/card";
 import { apiUrl, perPage } from "../../components/variables";
 
-function CakeList({ posts }) {
+function CakeList({ posts, category }) {
   let pages = [];
   const postsCount = posts.length;
   for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
@@ -143,9 +143,27 @@ function CakeList({ posts }) {
                                 state.sortData(posts, e);
                               }}
                             >
-                              Hamısı
+                              hamısı
                             </a>
                           </li>
+                          {category.map((item, i) => {
+                            return (
+                              <li key={item.name}>
+                                <a
+                                  className={
+                                    state.currentType == `${item.name}`
+                                      ? "active"
+                                      : null
+                                  }
+                                  onClick={(e) => {
+                                    state.sortData(posts, e);
+                                  }}
+                                >
+                                  {item.name}
+                                </a>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </aside>
                     </div>
@@ -170,6 +188,20 @@ export async function getStaticProps() {
     const posts = await res.json();
 
     props.posts = posts;
+  } catch (error) {
+    console.log("error", error);
+  }
+  try {
+    const res2 = await fetch(`${apiUrl}flowercategory/`);
+    const posts2 = await res2.json();
+    const sorted = []
+    for(let i=0; i<posts2.length; i++){
+      let item = posts2[i]
+      item.name = item.name.toLowerCase()
+      sorted.push(item)
+    }
+
+    props.category = sorted;
   } catch (error) {
     console.log("error", error);
   }

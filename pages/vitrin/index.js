@@ -7,7 +7,7 @@ import Search from "../../components/search";
 import Card from "../../components/card";
 import { apiUrl, perPage } from "../../components/variables";
 
-function CakeList({ posts }) {
+function CakeList({ posts, category }) {
   let pages = [];
   const postsCount = posts.length;
   for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
@@ -108,8 +108,7 @@ function CakeList({ posts }) {
                           </ul>
                         </nav>
                       </div>
-                      <div className="right_btn">
-                      </div>
+                      <div className="right_btn"></div>
                     </div>
                   </div>
                   <div className="col-lg-3">
@@ -142,147 +141,27 @@ function CakeList({ posts }) {
                                 state.sortData(posts, e);
                               }}
                             >
-                              Hamısı
+                              hamısı
                             </a>
                           </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "tort" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Tort
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "mini tort"
-                                  ? "active"
-                                  : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Mini tort
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "cupcake" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Cupcake
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "ekler" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Ekler
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "tartalet"
-                                  ? "active"
-                                  : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Tartalet
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "kurabiyə"
-                                  ? "active"
-                                  : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Kurabiyə
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "paxlava" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Paxlava
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "börək" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Börək
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "piroq" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Piroq
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "qelyanalti" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Qəlyanaltı
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className={
-                                state.currentType == "digər" ? "active" : null
-                              }
-                              onClick={(e) => {
-                                state.sortData(posts, e);
-                              }}
-                            >
-                              Digər
-                            </a>
-                          </li>
+                          {category.map((item, i) => {
+                            return (
+                              <li key={item.name}>
+                                <a
+                                  className={
+                                    state.currentType == `${item.name}`
+                                      ? "active"
+                                      : null
+                                  }
+                                  onClick={(e) => {
+                                    state.sortData(posts, e);
+                                  }}
+                                >
+                                  {item.name}
+                                </a>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </aside>
                     </div>
@@ -307,6 +186,20 @@ export async function getStaticProps() {
     const posts = await res.json();
 
     props.posts = posts;
+  } catch (error) {
+    console.log("error", error);
+  }
+  try {
+    const res2 = await fetch(`${apiUrl}vitrincategory/`);
+    const posts2 = await res2.json();
+    const sorted = []
+    for(let i=0; i<posts2.length; i++){
+      let item = posts2[i]
+      item.name = item.name.toLowerCase()
+      sorted.push(item)
+    }
+
+    props.category = sorted;
   } catch (error) {
     console.log("error", error);
   }

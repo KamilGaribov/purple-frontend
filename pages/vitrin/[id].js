@@ -51,9 +51,11 @@ function Post({ post } = {}) {
                   <div className="col-lg-6">
                     <div className="product_details_text">
                       <h4>{post.name}</h4>
-                      <p>
-                        <b>Ingredientər:</b> {post.ingredient}
-                      </p>
+                      {post.ingredient ? (
+                        <p>
+                          <b>Ingredientər:</b> {post.ingredient}
+                        </p>
+                      ) : null}
                       {post.weight ? (
                         <p>
                           <b>Çəki:</b> {post.weight} kq
