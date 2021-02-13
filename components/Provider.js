@@ -35,7 +35,7 @@ class Provider extends Component {
       } else {
         let sortedData = [];
         for (let i = 0; i < data.length; i++) {
-          if (data[i].category && data[i].category.name == type) {
+          if (data[i].category && data[i].category.name.toLowerCase() == type) {
             sortedData.push(data[i]);
           }
         }

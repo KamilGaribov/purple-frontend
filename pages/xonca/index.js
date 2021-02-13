@@ -8,6 +8,7 @@ import Card from "../../components/card";
 import { apiUrl, perPage } from "../../components/variables";
 
 function CakeList({ posts, category }) {
+  console.log(posts)
   let pages = [];
   const postsCount = posts.length;
   for (let i = 1; i <= Math.ceil(postsCount / perPage); i++) {
