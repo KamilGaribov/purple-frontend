@@ -12212,6 +12212,9 @@ i:before {
 .top_header_area .float-right .h_social {
   display: inline-block;
 }
+.h_social a {
+  cursor: pointer;
+}
 
 .top_header_area .float-right .h_social li {
   display: inline-block;

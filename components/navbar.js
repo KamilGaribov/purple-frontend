@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { apiUrl } from "./variables";
+
 
 function Navbar(props) {
   const {
@@ -15,6 +17,14 @@ function Navbar(props) {
   function fixed(a, b) {
     a = a * b;
     return a.toFixed(2);
+  }
+  function to_facebook(){
+    fetch(`${apiUrl}tf/`);
+    window.open('https://www.facebook.com/purplecakeboutiquebaku','_blank')
+  }
+  function to_instagram(){
+    fetch(`${apiUrl}ti/`);
+    window.open('https://www.instagram.com/purplecakeboutique/','_blank')
   }
   return (
     <header className="main_header_area">
@@ -45,16 +55,14 @@ function Navbar(props) {
             <ul className="h_social list_style">
               <li>
                 <a
-                  href="https://www.facebook.com/purplecakeboutiquebaku"
-                  target="_blank"
+                  onClick={to_facebook}
                 >
                   <i className="fa fa-facebook"></i>
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.instagram.com/purplecakeboutique/"
-                  target="_blank"
+                  onClick={to_instagram}
                 >
                   <i className="fa fa-instagram"></i>
                 </a>

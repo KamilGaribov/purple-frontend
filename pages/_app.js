@@ -6,7 +6,8 @@ import Link from "next/link";
 import Navbar from "../components/navbar";
 import Router from "next/router";
 import GoogleMapReact from "google-map-react";
-import { Marker } from "../components/variables";
+import { Marker, apiUrl } from "../components/variables";
+
 
 class MyApp extends App {
   componentDidMount() {
@@ -39,6 +40,18 @@ class MyApp extends App {
       document
         .querySelector("ul.navbar-nav li a[data-name=about]")
         .classList.add("active");
+    }
+    else if(url == "/ff/"){
+      fetch(`${apiUrl}ff/`);
+      window.location = "http://purplecakeboutique.az"
+    }
+    else if(url == "/fi/"){
+      fetch(`${apiUrl}fi/`);
+      window.location = "http://purplecakeboutique.az"
+    }
+    else if(url == "/fo/"){
+      fetch(`${apiUrl}fo/`);
+      window.location = "http://purplecakeboutique.az"
     }
     var basket = document.querySelector("#basketCount");
     if (window.localStorage.getItem("basket")) {
