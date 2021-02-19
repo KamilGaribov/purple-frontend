@@ -81,6 +81,25 @@ class MyApp extends App {
             content='"The Purple Cake Boutique" çox ləzzətli və özəl sənət əsəri olan tortlar təqdim edir...'
             key="title"
           />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLPMSG94V7"/>
+          <script dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-E3JVYYNCR5', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }} 
+            />
+          {/* <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-SLPMSG94V7');
+          </script> */}
         </Head>
         <Provider>
           <Component {...pageProps} />
