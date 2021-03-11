@@ -480,8 +480,6 @@ class Provider extends Component {
       if (JSON.parse(window.localStorage.getItem("basket"))) {
         var localStorage = JSON.parse(window.localStorage.getItem("basket"));
         for (let i = 0; i < localStorage.length; i++) {
-          console.log("salam");
-          console.log(parseFloat(localStorage[i].total));
           amount += parseFloat(localStorage[i].total);
           basket[localStorage[i].type + ":" + localStorage[i].id] = localStorage[i].quantity
         }
