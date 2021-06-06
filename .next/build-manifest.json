@@ -14,25 +14,25 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/_app": [
-      "static/chunks/main.js",
+    "/": [
       "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
       "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/chunks/main.js",
       "static/chunks/webpack.js",
+      "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/sebet/sifaris": [
-      "static/chunks/main.js",
+    "/kafe": [
       "static/chunks/webpack.js",
-      "static/chunks/pages/sebet/sifaris.js"
-    ],
-    "/vitrin": [
       "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/vitrin.js"
+      "static/chunks/pages/kafe.js"
     ]
   },
   "ampFirstPages": []
