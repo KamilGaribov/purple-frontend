@@ -6,5 +6,5 @@ RUN npm cache clean --force
 RUN npm install
 RUN npm install next@latest
 #RUN npm run build
-EXPOSE 3000
+EXPOSE 3001
 #CMD ["npm", "run", "start"]
