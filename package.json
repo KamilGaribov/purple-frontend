@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export && next start"
+    "build": "next build && next export && next start -p 3001"
   },
   "dependencies": {
     "cors": "^2.8.5",
